@@ -1,0 +1,39 @@
+{% extends '/template/baseback.html.twig' %}
+
+{% block title %}Remboursement index{% endblock %}
+
+{% block main %}
+    <h1>Remboursement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Montant_rembour</th>
+                <th>Date_rembour</th>
+                <th>Id_rec</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for remboursement in remboursements %}
+            <tr>
+                <td>{{ remboursement.id }}</td>
+                <td>{{ remboursement.montantRembour }}</td>
+                <td>{{ remboursement.dateRembour ? remboursement.dateRembour|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ remboursement.idRec }}</td>
+                <td>
+                    <a href="{{ path('app_remboursement_show', {'id': remboursement.id}) }}">show</a>
+                    <a href="{{ path('app_remboursement_edit', {'id': remboursement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_remboursement_new') }}">Create new</a>
+{% endblock %}
