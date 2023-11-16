@@ -1,0 +1,47 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Offres index{% endblock %}
+
+{% block main %}
+    <h1>Liste des offres</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Destination</th>
+                <th>Debut</th>
+                <th>Fin</th>
+                <th>Prix</th>
+                <th>Service</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+               
+                <td>{{ offre.destination }}</td>
+                <td>{{ offre.debut ? offre.debut|date('Y-m-d') : '' }}</td>
+                <td>{{ offre.fin ? offre.fin|date('Y-m-d') : '' }}</td>
+                <td>{{ offre.prix }}</td>
+               
+              
+                <td>{{ offre.service }}</td>
+            
+             
+                <td>
+                    <a href="{{ path('app_offres_show', {'idOffres': offre.idOffres}) }}">show</a>
+                    <a href="{{ path('app_offres_edit', {'idOffres': offre.idOffres}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_offres_new') }}">Create new</a>
+{% endblock %}

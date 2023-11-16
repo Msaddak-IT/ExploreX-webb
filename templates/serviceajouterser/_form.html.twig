@@ -1,0 +1,35 @@
+<center>
+<div class="body-container">
+<div class="form-container">
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+
+        {# Afficher les messages d'erreur globaux du formulaire #}
+        {{ form_errors(form) }}
+          <div>
+            {{ form_label(form.nomService) }}
+            {{ form_widget(form.nomService) }}
+                <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.nomService) }}
+           
+        </div>
+         <div>
+            {{ form_label(form.descriptionService) }}
+            {{ form_widget(form.descriptionService) }}
+                <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.descriptionService) }}
+           
+        </div>
+         <div>
+            {{ form_label(form.prixService) }}
+            {{ form_widget(form.prixService) }}
+                <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.prixService) }}
+           
+        </div>
+             
+          
+    </table>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+</center>

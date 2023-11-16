@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offres index{% endblock %}
+
+{% block body %}
+    <h1>Liste des offres</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Destination</th>
+                <th>Debut</th>
+                <th>Fin</th>
+                <th>Prix</th>
+                <th>Service</th>
+                <th></th>
+              
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+               
+                <td>{{ offre.destination }}</td>
+                <td>{{ offre.debut ? offre.debut|date('Y-m-d') : '' }}</td>
+                <td>{{ offre.fin ? offre.fin|date('Y-m-d') : '' }}</td>
+                <td>{{ offre.prix }}</td>
+               
+              
+                <td>{{ offre.service }}</td>
+            
+             
+                <td>
+                   
+                      <button class="btn" style="display: block; margin: auto;background-color: #047ffc; color: white;padding: 10px 25px;text-transform: uppercase;font-size: 14px;">reserver</button>
+                 </td>   
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}
