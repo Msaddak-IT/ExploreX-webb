@@ -1,0 +1,43 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Facture index{% endblock %}
+
+{% block main %}
+    <h1 style="margin-left:450px; margin-top: 50px;">Liste des factures</h1>
+    <div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Numfacture</th>
+                <th>MontantFacture</th>
+                <th>DatePaiement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+               
+                <td>{{ facture.numfacture }}</td>
+                <td>{{ facture.montantFacture }}</td>
+                <td>{{ facture.datePaiement }}</td>
+                <td>
+                    <a href="{{ path('app_facture_show', {'idFacture': facture.idFacture}) }}">Afficher</a>
+                    <a href="{{ path('app_facture_edit', {'idFacture': facture.idFacture}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <a href="{{ path('app_facture_new') }}" class="btn btn-primary">
+    <i class="fa fa-plus"></i> Créer Facture
+</a>
+
+{% endblock %}

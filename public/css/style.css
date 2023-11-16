@@ -11,6 +11,97 @@ body {
     background: #fff;
 	font-family: 'Raleway', sans-serif;
 }
+/* public/css/style.css */
+/* public/css/style.css */
+/* Style pour le conteneur du formulaire (centre le formulaire) */
+/* public/css/style.css */
+/* Style pour le conteneur du formulaire (centre le formulaire) */
+/* Style pour le conteneur du formulaire (centre le formulaire) */
+.form-container {
+	margin:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f4f4;
+}
+
+/* Style pour le formulaire */
+/* public/css/style.css */
+/* Style pour le formulaire */
+form {
+	max-width: 600px; /* Augmentez la valeur pour agrandir le formulaire */
+    width: 100%;
+    margin-top:50px; /* Centre le formulaire horizontalement */
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Style pour les champs de formulaire */
+form input[type="text"],
+form input[type="date"],
+
+form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style pour le bouton de soumission */
+form button {
+    background: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto; /* Centre le bouton horizontalement */
+}
+
+/* Style pour le bouton de soumission au survol */
+form button:hover {
+    background: #1e70bf;
+}
+
+/* Style pour les messages d'erreur (le cas échéant) */
+.form-error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+
+
+/* Style pour les titres de la page */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Style pour le corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+}
+
+/* Style pour les liens */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+/* Style pour les liens au survol */
+a:hover {
+    color: #1e70bf;
+}
 
 html {
   scroll-behavior: smooth;
@@ -157,6 +248,8 @@ nav li.booking a {
     color: #fff;
     letter-spacing: 1px;
     font-size: 14px;
+	margin-right: 10px;
+	
 }
 
 nav ul li ul li:hover { background: #f8f9fa; }
@@ -167,6 +260,7 @@ nav a:hover {
 }
 .menu li.active  a{ 
 	color: #fff;
+	
 }
 
 /* Hide Dropdowns by Default
@@ -1623,3 +1717,20 @@ p.duration {
 	
 }
 /*-- //Responsive design --*/
+/* public/css/style.css */
+/* Style pour la section d'en-tête */
+.header-container {
+    background-image: url("../images/banner1.jpg"); /* Chemin relatif vers l'image de fond */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 0;
+    text-align: center;
+	color: #ffffff;
+}
+
+/* Style pour le contenu dans la section d'en-tête (menu, titre, etc.) */
+.header-container .container {
+     
+    padding: 10px;
+}

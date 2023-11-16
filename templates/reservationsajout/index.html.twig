@@ -1,0 +1,53 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Reservations index{% endblock %}
+
+{% block main %}
+
+    <h1 style="margin-left:500px;">liste des Réservations</h1>
+    <div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>Cinclient</th>
+                <th>Nomclient</th>
+                <th>Nombrepersonnes</th>
+                <th>Datedebut</th>
+                <th>Datefin</th>
+                <th>ModePaiement</th>
+                <th>Typehebergement</th>
+                <th>Typeactivite</th>
+                <th>Numtel</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+               
+                <td>{{ reservation.cinclient }}</td>
+                <td>{{ reservation.nomclient }}</td>
+                <td>{{ reservation.nombrepersonnes }}</td>
+                <td>{{ reservation.datedebut ? reservation.datedebut|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.datefin ? reservation.datefin|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.modePaiement }}</td>
+                <td>{{ reservation.typehebergement }}</td>
+                <td>{{ reservation.typeactivite }}</td>
+                <td>{{ reservation.numtel }}</td>
+                <td>
+                    <a href="{{ path('app_reservationsajout_show', {'idreservation': reservation.idreservation}) }}">Afficher</a>
+                    <a href="{{ path('app_reservationsajout_edit', {'idreservation': reservation.idreservation}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+   
+{% endblock %}
