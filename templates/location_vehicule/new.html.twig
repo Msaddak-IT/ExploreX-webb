@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New vehicle location{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center; margin-top: 50px;">Add new location</h1>
+    {{ include('location_vehicule/_form.html.twig', {'button_label': 'Add'}) }}
+   
+        <div style="text-align: center;">
+            <a href="{{ path('app_client') }}">Back to list</a>
+        </div>
+     </div>
+{% endblock %}

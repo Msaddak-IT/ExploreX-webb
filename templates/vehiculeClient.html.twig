@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicule index{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center; margin-top: 50px;margin-bottom: 50px;">List of vehicles</h1>
+    <div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Type of vehicle</th>
+                <th>Brand</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vehicule in vehicules %}
+            <tr>
+                <td>{{ vehicule.matricule }}</td>
+                <td>{{ vehicule.typeVehicule }}</td>
+                <td>{{ vehicule.marqueVehicule }}</td>
+                <td>
+                    <a href="{{ path('app_location_vehicule_new', {'matricule': vehicule.matricule}) }}">Book Now</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

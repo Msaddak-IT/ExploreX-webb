@@ -1,0 +1,14 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Edit Vehicule{% endblock %}
+
+{% block main %}
+    <h1 style="text-align: center;margin-top: 50px;">Edit Vehicule</h1>
+
+    {{ include('vehicule/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ include('vehicule/_delete_form.html.twig') }}
+     <div style="text-align: center;">
+    <a href="{{ path('app_vehicule_index') }}">Back to list</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}LocationVehicule index{% endblock %}
+
+{% block main %}
+    <h1 style="text-align: center; margin-top: 50px;margin-bottom: 50px;">List of locations</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>CIN Client</th>
+                <th>Rental duration</th>
+                <th>Pick-up date</th>
+                <th>Return date</th>
+                <th>Full price</th>
+                <th>Associated vehicle</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for location_vehicule in location_vehicules %}
+            <tr>
+                
+                <td>{{ location_vehicule.Cinclientvehicule }}</td>
+                <td>{{ location_vehicule.Dureelocvehicule }}</td>
+                <td>{{ location_vehicule.Pickupvehicule ? location_vehicule.Pickupvehicule|date('Y-m-d') : ''}}</td>
+                <td>{{ location_vehicule.Returnvehicule ? location_vehicule.Returnvehicule|date('Y-m-d') : ''}}</td>
+                <td>{{ location_vehicule.MontantLocation }}</td>
+                <td>{{ location_vehicule.Vehicules }}</td>
+                <td>
+                    <a href="{{ path('app_location_vehicule_show', {'id_loc_vehicule': location_vehicule.Idlocvehicule}) }}">Show</a>
+                    <a href="{{ path('app_location_vehicule_edit', {'id_loc_vehicule': location_vehicule.Idlocvehicule}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

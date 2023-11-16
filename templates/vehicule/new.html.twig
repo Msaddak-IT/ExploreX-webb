@@ -1,0 +1,14 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}New Vehicule{% endblock %}
+
+{% block main %}
+    
+    <h1 style="text-align: center; margin-top: 50px;">Add new Vehicle</h1>
+    {{ include('vehicule/_form.html.twig', {'button_label': 'Add'}) }}
+   
+        <div style="text-align: center;">
+            <a href="{{ path('app_vehicule_index') }}">Back to list</a>
+        </div>
+     </div>
+{% endblock %}
