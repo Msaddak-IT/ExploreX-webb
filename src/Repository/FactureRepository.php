@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Facture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Transport\Dsn;
 
 /**
  * @extends ServiceEntityRepository<Facture>
@@ -16,9 +19,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class FactureRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $mailer;
+    public function __construct(ManagerRegistry $registry, MailerInterface $mailer)
     {
         parent::__construct($registry, Facture::class);
+        $this->mailer = $mailer;
     }
 
 //    /**
@@ -45,4 +50,36 @@ class FactureRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+// Tri croissant par date de paiement
+public function findAllOrderByDatePaiementAsc()
+{
+    $qb = $this->createQueryBuilder('f')
+        ->orderBy('f.datePaiement', 'ASC');
+
+    return $qb->getQuery()->getResult();
 }
+
+// Tri décroissant par date de paiement
+public function findAllOrderByDatePaiementDesc()
+{
+    $qb = $this->createQueryBuilder('f')
+        ->orderBy('f.datePaiement', 'DESC');
+
+    return $qb->getQuery()->getResult();
+}
+public function sendEmail(MailerInterface $mailer, $emailDestinataire)
+{
+    // Créer l'e-mail
+    $email = (new Email())
+        ->from('from@example.com')
+        ->to($emailDestinataire)
+        ->subject('Hello')
+        ->text('Hello, this is a test email.');
+
+    // Envoyer l'e-mail
+    $mailer->send($email);
+}
+
+}
+
+

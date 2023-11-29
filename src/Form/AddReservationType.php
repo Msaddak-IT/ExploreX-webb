@@ -108,6 +108,7 @@ class AddReservationType extends AbstractType
                 'Camping' => 'Camping',
                 'Cabane dans les arbres' => 'Cabane dans les arbres',
                 'Gîte rural' => 'Gîte rural',
+                'Motels' => 'Motels',
             ],
             'constraints' => [
                 new Assert\NotBlank([

@@ -343,3 +343,22 @@ form button:hover {
     font-weight: bold;
     /* Add any additional styles for the link text */
 }
+#searchInput {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('icone-recherche.png'); /* Ajoutez le chemin de votre icône de recherche */
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding-left: 40px; /* Assurez-vous de laisser suffisamment d'espace pour l'icône */
+    transition: width 0.3s ease-in-out;
+  }
+  
+  #searchInput:focus {
+    width: 400px; /* Ajustez la largeur lorsqu'il est en focus */
+  }
+  
