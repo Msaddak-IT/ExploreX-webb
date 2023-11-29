@@ -1,0 +1,55 @@
+{% extends 'baseback.html.twig' %}
+
+
+
+{% block main %}
+
+<head>
+    <title>Votre page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Définir une taille plus petite pour le conteneur du graphique */
+        #pie-chart-container {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenu de votre page -->
+    <div id="pie-chart-container">
+        <canvas id="pie-chart"></canvas>
+    </div>
+
+    <script>
+        // Récupérer les données des statistiques depuis le contrôleur
+        const stats = {{ stats|json_encode|raw }};
+        
+        // Récupérer les destinations et les quantités correspondantes
+        const destinations = Object.keys(stats);
+        const quantities = Object.values(stats);
+        
+        // Créer le graphique en secteurs
+        const ctx = document.getElementById('pie-chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: destinations,
+                datasets: [{
+                    data: quantities,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        // Ajoutez plus de couleurs si nécessaire
+                    ],
+                }],
+            },
+            options: {
+                // Ajoutez des options supplémentaires selon vos besoins
+            },
+        });
+    </script>
+    </body>
+    {% endblock %}

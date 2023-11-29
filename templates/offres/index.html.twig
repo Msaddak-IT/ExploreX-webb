@@ -1,37 +1,76 @@
 {% extends 'baseback.html.twig' %}
 
-{% block title %}Offres index{% endblock %}
+{% block title %}Liste des offres{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <style>
+        .flash-success {
+            background-color: green;
+            color: white;
+        }
+
+        .flash-error {
+            background-color: red;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+
+{% block flash_messages %}
+    {% for flashMessage in app.flashes('success') %}
+    <div class="flash-message flash-success">{{ flashMessage }}</div>
+{% endfor %}
+
+{% for flashMessage in app.flashes('error') %}
+    <div class="flash-message flash-error">{{ flashMessage }}</div>
+{% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            // Supprime les messages flash après un certain délai
+            setTimeout(function() {
+                $('.flash-message').remove();
+            }, 5000);
+        });
+    </script>
+{% endblock %}
 
 {% block main %}
     <h1>Liste des offres</h1>
+  <div>
+    <a href="{{ path('app_offres_index', {'sort': 'asc'}) }}" class="btn btn-primary">Tri Croissant</a>
+    <a href="{{ path('app_offres_index', {'sort': 'desc'}) }}" class="btn btn-primary">Tri Décroissant</a>
+</div>
+<div id="message-container"></div>
+
+    <div id="message-container"></div>
 
     <table class="table">
         <thead>
             <tr>
-               
                 <th>Destination</th>
                 <th>Debut</th>
                 <th>Fin</th>
                 <th>Prix</th>
                 <th>Service</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for offre in offres %}
             <tr>
-               
                 <td>{{ offre.destination }}</td>
                 <td>{{ offre.debut ? offre.debut|date('Y-m-d') : '' }}</td>
                 <td>{{ offre.fin ? offre.fin|date('Y-m-d') : '' }}</td>
                 <td>{{ offre.prix }}</td>
-               
-              
                 <td>{{ offre.service }}</td>
-            
-             
                 <td>
-                    <a href="{{ path('app_offres_show', {'idOffres': offre.idOffres}) }}">show</a>
+                    <a href="{{ path('app_offres_index', {'idOffres': offre.idOffres}) }}">show</a>
                     <a href="{{ path('app_offres_edit', {'idOffres': offre.idOffres}) }}">edit</a>
                 </td>
             </tr>
@@ -42,6 +81,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_offres_new') }}">Create new</a>
+     <a href="{{ path('app_offres_new') }}">Create new</a>
 {% endblock %}

@@ -1,5 +1,5 @@
 /* Credit: http://www.templatemo.com */
-    
+
 $(document).ready( function() {        
 
 	// sidebar menu click

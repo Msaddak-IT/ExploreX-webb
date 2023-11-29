@@ -20,6 +20,46 @@ class OffresRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Offres::class);
     }
+    public function countByDestination(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->select('o.destination, COUNT(o) as quantity')
+            ->groupBy('o.destination');
+    
+        $results = $queryBuilder->getQuery()->getResult();
+    
+        $stats = [];
+        foreach ($results as $result) {
+            $destination = $result['destination'];
+            $quantity = $result['quantity'];
+            $stats[$destination] = $quantity;
+        }
+    
+        return $stats;
+    }
+    public function findByDestination($destination)
+    {
+        $qb = $this->createQueryBuilder('o');
+    
+        if ($destination) {
+            $qb->andWhere('o.destination = :destination')
+                ->setParameter('destination', $destination);
+        }
+    
+        return $qb->getQuery()->getResult(); // Retourne les résultats de la requête
+    }
+    public function findAllSortedByDate($sort = 'asc')
+    {
+        $qb = $this->createQueryBuilder('r');
+    
+        $order = ($sort === 'asc') ? 'ASC' : 'DESC';
+        $qb->addOrderBy('r.debut', $order);
+    
+        dump($qb->getQuery()->getSQL()); // Ajoutez cette ligne pour déboguer la requête SQL
+    
+        return $qb->getQuery()->getResult();
+    }
+}    
 
 //    /**
 //     * @return Offres[] Returns an array of Offres objects
@@ -45,4 +85,4 @@ class OffresRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+

@@ -31,22 +31,7 @@ class OffresType extends AbstractType
                 new NotBlank(['message' => 'Le champ "Destination" ne peut pas être vide.']),
             ],
         ])
-        /*
-        ->add('debut', DateType::class, [
-            'widget' => 'single_text',
-            'format' => 'yyyy-MM-dd',
-            'required' => false, // Allow null values
-        ])*/
-        /*
-        ->add('fin', DateType::class, [
-            'widget' => 'single_text',
-            'format' => 'yyyy-MM-dd',
-            'required' => false, // Allow null values
-            'constraints' => [
-                new Callback([$this, 'validateDateRange']),
-            ],
-        ])
-        */
+        
         ->add('debut', DateType::class, [
             'label' => 'Date de début',
             'widget' => 'single_text',
@@ -81,13 +66,7 @@ class OffresType extends AbstractType
             /*
             ->add('submit', SubmitType::class) */;
     }
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-           /* 'data_class' => Offres::class,*/
-           'data_class' => \App\Entity\Offres::class,
-        ]);
-    }
+ 
     public function validateDateRange($value, ExecutionContextInterface $context): void
     {
         $form = $context->getRoot();
@@ -100,6 +79,7 @@ class OffresType extends AbstractType
                 ->addViolation();
         }
     }
+    
 }
 
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle offre créée</title>
+</head>
+<body>
+    <h1>Nouvelle offre créée</h1>
+    <p>Voici les détails de la nouvelle offre :</p>
+    <ul>
+      
+        <li>Destination : {{offre.destination  }}</li>
+     
+        <li>Debut:{{ offre.debut ? offre.debut|date('Y-m-d') : '' }}</li>
+                    <li>fin:{{ offre.fin ? offre.fin|date('Y-m-d') : '' }}</li>
+                <li>Prix : {{ offre.prix }}</li>
+               
+              
+                <li> service:{{ offre.service }}</li>
+        <!-- Ajoutez d'autres détails de l'offre selon vos besoins -->
+    </ul>
+</body>
+</html>
