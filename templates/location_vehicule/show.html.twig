@@ -8,23 +8,23 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Cin_client_vehicule</th>
+                <th>CIN Client</th>
                 <td>{{ location_vehicule.cinClientVehicule }}</td>
             </tr>
             <tr>
-                <th>Duree_loc_vehicule</th>
+                <th>Rental duration</th>
                 <td>{{ location_vehicule.dureeLocVehicule }}</td>
             </tr>
             <tr>
-                <th>Pickup_vehicule</th>
+                <th>Pick-up date</th>
                 <td>{{ location_vehicule.pickupVehicule ? location_vehicule.Pickupvehicule|date('Y-m-d') : ''}}</td>
             </tr>
             <tr>
-                <th>Return_vehicule</th>
+                <th>Return date</th>
                 <td>{{ location_vehicule.returnVehicule ? location_vehicule.Returnvehicule|date('Y-m-d') : ''}}</td>
             </tr>
             <tr>
-                <th>MontantLocation</th>
+                <th>Full price</th>
                 <td>{{ location_vehicule.montantLocation }}</td>
             </tr>
         </tbody>

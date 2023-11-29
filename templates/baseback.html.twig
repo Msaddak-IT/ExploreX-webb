@@ -7,6 +7,9 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{{ asset('backoffice/css/templatemo_main.css') }}">
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('https://d3js.org/d3.v7.min.js') }}"></script>
+    <script src="{{ asset('js/recherche.js') }}"></script>
     <!--
     Dashboard Template
     http://www.templatemo.com/preview/templatemo_415_dashboard
@@ -33,7 +36,7 @@
                     <span class="btn btn-default">Go</span>
                 </form>
             </li>
-            <li class="active"><a href="{{ path('app_acceuil') }}"><i class="fa fa-home"></i>Dashboard</a></li>
+            <li class="active"><a href="{{ path('app_backoffice') }}"><i class="fa fa-home"></i>Dashboard</a></li>
             <li class="sub open">
                 <a href="javascript:;">
                     <i class="fa fa-database"></i> Transport management <div class="pull-right"><span class="caret"></span></div>

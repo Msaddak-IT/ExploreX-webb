@@ -45,4 +45,54 @@ class LocationVehiculeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findAllSortedByPickupDate($sort = 'asc')
+{
+    $qb = $this->createQueryBuilder('lv');
+
+    if ($sort === 'asc') {
+        $qb->orderBy('lv.pickup_vehicule', 'ASC');
+    } elseif ($sort === 'desc') {
+        $qb->orderBy('lv.pickup_vehicule', 'DESC');
+    }
+
+    return $qb->getQuery()->getResult();
 }
+/**
+     * Check if a vehicle is available for the given period.
+     *
+     * @param int    $matricule   The matricule of the vehicle.
+     * @param string $pickupDate  The pickup date.
+     * @param string $returnDate  The return date.
+     *
+     * @return bool True if the vehicle is available, false otherwise.
+     */
+    public function isVehicleAvailable(int $matricule, \DateTime $pickupDate, \DateTime $returnDate): bool
+{
+    // Pas besoin de convertir les objets DateTime, car ils sont déjà passés en tant que paramètres
+
+    // Query pour vérifier si le véhicule est disponible pour la période donnée
+    $queryBuilder = $this->createQueryBuilder('l')
+        ->andWhere('l.vehicules = :matricule')
+        ->andWhere('(:pickupDate BETWEEN l.pickup_vehicule AND l.return_vehicule OR :returnDate BETWEEN l.pickup_vehicule AND l.return_vehicule)')
+        ->setParameter('matricule', $matricule)
+        ->setParameter('pickupDate', $pickupDate->format('Y-m-d'))
+        ->setParameter('returnDate', $returnDate->format('Y-m-d'));
+
+    // Exécuter la requête et obtenir le résultat
+    $result = $queryBuilder->getQuery()->getResult();
+
+    // S'il y a des résultats, le véhicule n'est pas disponible
+    return empty($result);
+}
+
+
+
+
+
+
+}
+
+
+
+
+

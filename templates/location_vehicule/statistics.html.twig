@@ -1,0 +1,90 @@
+{# templates/statistics/client_statistics_chart.html.twig #}
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Client Statistics Chart{% endblock %}
+
+{% block main %}
+    <h1>Statistics for the customer who has the most locations</h1>
+    <div id="clientStatisticsChartContainerCin" style="width: 80%; margin: 20px auto;">
+        <canvas id="clientStatisticsChartCin"></canvas>
+    </div>
+
+    <h1>Statistics for the most requested brands</h1>
+    <div id="clientStatisticsChartContainerMarque" style="width: 80%; margin: 20px auto;">
+        <canvas id="clientStatisticsChartMarque"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Données provenant du contrôleur
+        var dataCin = {
+            labels: [
+                {% for cin in allCin %}
+                    '{{ cin }}',
+                {% endfor %}
+            ],
+            datasets: [{
+                label: 'CIN Customer',
+                data: [
+                    {% for cin in allCin %}
+                        {{ cinCounts[cin] }},
+                    {% endfor %}
+                ],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var dataMarque = {
+            labels: [
+                {% for marque in allMarques %}
+                    '{{ marque }}',
+                {% endfor %}
+            ],
+            datasets: [{
+                label: 'Brand',
+                data: [
+                    {% for marque in allMarques %}
+                        {{ marqueCount[marque] }},
+                    {% endfor %}
+                ],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Création des graphiques à barres
+        var ctxCin = document.getElementById('clientStatisticsChartCin').getContext('2d');
+        var myChartCin = new Chart(ctxCin, {
+            type: 'bar',
+            data: dataCin,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var ctxMarque = document.getElementById('clientStatisticsChartMarque').getContext('2d');
+        var myChartMarque = new Chart(ctxMarque, {
+            type: 'bar',
+            data: dataMarque,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
+
+
+
+

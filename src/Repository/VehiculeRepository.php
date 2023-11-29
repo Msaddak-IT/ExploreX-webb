@@ -45,4 +45,18 @@ class VehiculeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findAllSortedByMatricule($sort = 'asc')
+{
+    $qb = $this->createQueryBuilder('v');
+
+    if ($sort === 'asc') {
+        $qb->orderBy('v.matricule', 'ASC');
+    } elseif ($sort === 'desc') {
+        $qb->orderBy('v.matricule', 'DESC');
+    }
+
+    return $qb->getQuery()->getResult();
+}
+
 }

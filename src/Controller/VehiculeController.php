@@ -15,11 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class VehiculeController extends AbstractController
 {
     #[Route('/', name: 'app_vehicule_index', methods: ['GET'])]
-    public function index(VehiculeRepository $vehiculeRepository): Response
+    public function index(VehiculeRepository $vehiculeRepository, Request $request): Response
     {
-        return $this->render('vehicule/index.html.twig', [
-            'vehicules' => $vehiculeRepository->findAll(),
-        ]);
+        $sort = $request->query->get('sort');
+    $vehicules = $vehiculeRepository->findAllSortedByMatricule($sort);
+
+    return $this->render('vehicule/index.html.twig', [
+        'vehicules' => $vehicules,
+    ]);
     }
 
     #[Route('/new', name: 'app_vehicule_new', methods: ['GET', 'POST'])]

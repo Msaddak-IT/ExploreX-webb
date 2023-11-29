@@ -3,11 +3,58 @@
 {% block title %}New vehicle location{% endblock %}
 
 {% block body %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger flash-message">
+        {{ message }}
+    </div>
+{% endfor %}
 <h1 style="text-align: center; margin-top: 50px;">Add new location</h1>
     {{ include('location_vehicule/_form.html.twig', {'button_label': 'Add'}) }}
-   
+    
         <div style="text-align: center;">
-            <a href="{{ path('app_client') }}">Back to list</a>
+            <a href="{{ path('app_client') }}" class="btn btn-primary">Back </a>
         </div>
      </div>
+     <style>
+    /* Animation de translation pour le message d'erreur */
+    .flash-message {
+        position: fixed; /* Fixer la position pour que le message reste à droite */
+        top: 310px; /* Ajuster la position verticale pour aligner avec le texte h1 */
+        right: -100%; /* Démarrer à droite de la page */
+        opacity: 0;
+        transition: opacity 0.5s, right 0.5s; /* Ajouter la transition vers la droite */
+        max-width: 300px; /* Limiter la largeur du flash message */
+        background-color: #ff4444; /* Couleur de fond pour les erreurs */
+        color: #fff; /* Couleur du texte */
+        padding: 15px; /* Rembourrage interne */
+        border-radius: 5px; /* Coins arrondis */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    }
+
+    .flash-message.show {
+        right: 20px; /* Arrêter à une certaine distance de la droite (ajuster si nécessaire) */
+        opacity: 1;
+    }
+</style>
+
+<script>
+     // Attendre que le DOM soit chargé
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sélectionner tous les éléments avec la classe flash-message
+        var flashMessages = document.querySelectorAll('.flash-message');
+
+        // Ajouter la classe show à chaque élément après un court délai
+        flashMessages.forEach(function(message) {
+            setTimeout(function() {
+                message.classList.add('show');
+            }, 100);
+            
+            // Supprimer la classe show après 10 secondes
+            setTimeout(function() {
+                message.classList.remove('show');
+            }, 15000);
+        });
+    });
+</script>
 {% endblock %}

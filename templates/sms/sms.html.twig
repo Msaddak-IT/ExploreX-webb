@@ -1,0 +1,63 @@
+{% extends 'baseback.html.twig' %}
+
+{% block main %}
+    <div class="bodysms">
+    <form method="post" action="{{ path('envoyer_sms') }}" class="formsms">
+        <label for="numeroTelephone">Phone number :</label>
+        <input type="text" id="numeroTelephone" name="numeroTelephone" required>
+
+        <label for="messageTexte">Message :</label>
+        <textarea id="messageTexte" name="messageTexte" required rows="5" cols="30">
+                Details of your location :
+                Your CIN: {{ app.request.query.get('cin')|default('') }} 
+                Rental duration: {{ app.request.query.get('duree')|default('') }}
+                Pick-up date: {{ app.request.query.get('pickup')|default('') }}
+                Return date: {{ app.request.query.get('return')|default('') }}
+                Full price: {{ app.request.query.get('montant')|default('') }} Dt 
+                WELCOME !!
+                
+            </textarea>
+        <button type="submit">Send SMS</button>
+    </form>
+    </div>
+    {% block styles %}
+<style>
+.bodysms {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Ajustement de la valeur */
+  height: 100vh;
+  margin-top: 120px;
+}
+
+.formsms {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formsms label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formsms input[type="text"],
+.formsms textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.formsms button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+</style>
+{% endblock %}
+{% endblock %}
+

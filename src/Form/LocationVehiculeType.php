@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class LocationVehiculeType extends AbstractType
 {
@@ -60,7 +62,7 @@ class LocationVehiculeType extends AbstractType
             'label' => 'Return date',
         ])
         ->add('montantLocation', null, [
-            'label' => 'Full price',
+            'label' => 'Full price ( 120 dt per day )',
             'constraints' => [
                 new NotBlank(['message' => 'Full price cannot be empty.']),
             ],
@@ -72,11 +74,30 @@ class LocationVehiculeType extends AbstractType
             'required' => true,
             'label' => 'Associated vehicle',
         ])
-        ->add('submit', SubmitType::class);
+        ->add('submit', SubmitType::class)
+        ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+                $data = $event->getData();
+
+                // Retrieve the rental duration submitted
+                $dureeLoc = $data['duree_loc_vehicule'];
+
+                // Extract the integer from the duration (example: "5 days" -> 5)
+                $dureeInt = (int) preg_replace('/[^0-9]/', '', $dureeLoc);
+
+                // Calculate the rental amount
+                $montant = $dureeInt * 120;
+
+                // Modify the submitted data to include the calculated amount
+                $data['montantLocation'] = $montant;
+
+                $event->setData($data);
+            });
+    
+        }
         
         
         
-    }
+    
 
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -91,6 +112,7 @@ class LocationVehiculeType extends AbstractType
     {
         $pickupDate = $data->getPickupVehicule();
         $returnDate = $data->getReturnVehicule();
+        $rentalDuration = $data->getDureeLocVehicule();
     
         // Custom validation logic
         if ($pickupDate > $returnDate) {
@@ -99,6 +121,29 @@ class LocationVehiculeType extends AbstractType
                 ->atPath('pickup_vehicule')
                 ->addViolation();
         }
+        // Convertir la durée en un nombre entier
+$duration = (int)$rentalDuration;
+
+// Vérifier si la durée est valide
+if ($duration <= 0) {
+    // La durée doit être un nombre entier positif
+    // Vous pouvez gérer cette erreur de la manière qui convient à votre application
+    $context
+        ->buildViolation('The rental period must be a positive integer.')
+        ->atPath('duree_loc_vehicule')
+        ->addViolation();
+} else {
+    // Calculate the expected return date based on pickup date and rental duration
+    $expectedReturnDateTime = clone $pickupDate;
+    $expectedReturnDateTime->modify('+' . $duration . ' days');
+
+    if ($returnDate != $expectedReturnDateTime) {
+        $context
+            ->buildViolation('The period between dates must equal the rental duration..')
+            ->atPath('return_vehicule')
+            ->addViolation();
+    }
+}
     
         $today = new \DateTime('today');
     

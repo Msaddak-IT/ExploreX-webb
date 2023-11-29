@@ -36,58 +36,7 @@ h1 { font-size: 24px; }
     font-size: 24px;
     margin: 10px 15px;
 }
-.body-container  {
-    margin-bottom: 120px;
-    margin-top: 120px;
-}
-.body-container a {
-    text-align: center;
-    display: block; /* Pour occuper toute la largeur disponible */
-    margin-top: 20px; /* Ajoutez une marge si nécessaire */
-}
-.body-container h1{
-    margin-bottom: 60px; /* Ajoutez une marge si nécessaire */
-}
 
-
-.form-container form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Centre le contenu du formulaire */
-}
-
-/* Styles pour les champs du formulaire */
-.form-container input,
-.form-container select,
-.form-container textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-/* Styles pour le bouton du formulaire */
-.form-container button {
-    background: #047ffc;
-    padding: 10px 25px;
-    display: inline-block; /* Affiche le bouton en tant que bloc en ligne */
-    text-transform: uppercase;
-    color: #fff;
-    letter-spacing: 1px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-	
-}
-
-.form-container button:hover {
-    background: #0250d5;
-}
 .templatemo-content-wrapper {
     float: left;
     width: 100%;
@@ -274,4 +223,56 @@ h1 { font-size: 24px; }
     .templatemo-chart-box {
         padding-right: 0;
     }
+}
+.body-container  {
+    margin-bottom: 120px;
+    margin-top: 120px;
+}
+.body-container a {
+    text-align: center;
+    display: block; /* Pour occuper toute la largeur disponible */
+    margin-top: 20px; /* Ajoutez une marge si nécessaire */
+}
+.body-container h1{
+    margin-bottom: 60px; /* Ajoutez une marge si nécessaire */
+}
+
+
+.form-container form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centre le contenu du formulaire */
+}
+
+/* Styles pour les champs du formulaire */
+.form-container input,
+.form-container select,
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Styles pour le bouton du formulaire */
+.form-container button {
+    background: #047ffc;
+    padding: 10px 25px;
+    display: inline-block; /* Affiche le bouton en tant que bloc en ligne */
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	
+}
+
+.form-container button:hover {
+    background: #0250d5;
 }

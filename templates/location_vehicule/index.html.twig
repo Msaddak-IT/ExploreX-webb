@@ -4,6 +4,15 @@
 
 {% block main %}
     <h1 style="text-align: center; margin-top: 50px;margin-bottom: 50px;">List of locations</h1>
+     
+    <div>
+    <a href="{{ path('app_location_vehicule_index', {'sort': 'asc'}) }}" class="btn btn-primary">Ascending Sort</a>
+    <a href="{{ path('app_location_vehicule_index', {'sort': 'desc'}) }}" class="btn btn-primary">Descending Sort</a>
+    <a href="{{ path('app_location_vehicule_statistics', {'sort': 'desc'}) }}" class="btn btn-primary">View Statistics</a>
+    </div>
+    
+    <input type="text" id="searchInput" placeholder="Search" />
+   
     <table class="table">
         <thead>
             <tr>
@@ -14,22 +23,32 @@
                 <th>Return date</th>
                 <th>Full price</th>
                 <th>Associated vehicle</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for location_vehicule in location_vehicules %}
             <tr>
                 
-                <td>{{ location_vehicule.Cinclientvehicule }}</td>
-                <td>{{ location_vehicule.Dureelocvehicule }}</td>
-                <td>{{ location_vehicule.Pickupvehicule ? location_vehicule.Pickupvehicule|date('Y-m-d') : ''}}</td>
-                <td>{{ location_vehicule.Returnvehicule ? location_vehicule.Returnvehicule|date('Y-m-d') : ''}}</td>
-                <td>{{ location_vehicule.MontantLocation }}</td>
-                <td>{{ location_vehicule.Vehicules }}</td>
+                <td class="search-cin">{{ location_vehicule.Cinclientvehicule }}</td>
+                <td class="search-duree">{{ location_vehicule.Dureelocvehicule }}</td>
+                <td class="search-pickup">{{ location_vehicule.Pickupvehicule ? location_vehicule.Pickupvehicule|date('Y-m-d') : ''}}</td>
+                <td class="search-return">{{ location_vehicule.Returnvehicule ? location_vehicule.Returnvehicule|date('Y-m-d') : ''}}</td>
+                <td class="search-montant">{{ location_vehicule.MontantLocation }} Dt</td>
+                <td class="search-vehicule">{{ location_vehicule.Vehicules }}</td>
                 <td>
-                    <a href="{{ path('app_location_vehicule_show', {'id_loc_vehicule': location_vehicule.Idlocvehicule}) }}">Show</a>
-                    <a href="{{ path('app_location_vehicule_edit', {'id_loc_vehicule': location_vehicule.Idlocvehicule}) }}">Edit</a>
+                   <a class="link-space" href="{{ path('app_location_vehicule_show', {'id_loc_vehicule': location_vehicule.Idlocvehicule}) }}">Show</a>
+                   <a class="link-space" href="{{ path('app_location_vehicule_edit', {'id_loc_vehicule': location_vehicule.Idlocvehicule}) }}">Edit</a>
+                   <span class="link-space"></span> <!-- Ajout d'un espace avec un élément de type span avec une classe CSS -->
+                   <a id="sendSmsLink" class="link-space" href="{{ path('envoyer_sms', {
+                    'cin': location_vehicule.Cinclientvehicule,
+                    'duree': location_vehicule.Dureelocvehicule,
+                    'pickup': location_vehicule.Pickupvehicule ? location_vehicule.Pickupvehicule|date('Y-m-d') : '',
+                    'return': location_vehicule.Returnvehicule ? location_vehicule.Returnvehicule|date('Y-m-d') : '',
+                    'montant': location_vehicule.MontantLocation,
+                    'vehicule': location_vehicule.Vehicules
+                        }) }}">Send SMS
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -39,6 +58,164 @@
         {% endfor %}
         </tbody>
     </table>
+    
+    
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("input", function () {
+            var value = $(this).val().toLowerCase();
 
+            $("tbody tr").filter(function () {
+                var row = $(this);
+                var cinMatch = row.find(".search-cin").text().toLowerCase().includes(value);
+                var dureeMatch = row.find(".search-duree").text().toLowerCase().includes(value);
+                var pickupMatch = row.find(".search-pickup").text().toLowerCase().includes(value);
+                var returnMatch = row.find(".search-return").text().toLowerCase().includes(value);
+                var montantMatch = row.find(".search-montant").text().toLowerCase().includes(value);
+                var vehiculeMatch = row.find(".search-vehicule").text().toLowerCase().includes(value);
+
+                row.toggle(cinMatch || dureeMatch || pickupMatch || returnMatch || montantMatch || vehiculeMatch);
+            });
+        });
+    });
+</script>
+
+     {% block style %}
+    <style>
+    .body-container  {
+    margin-bottom: 120px;
+    margin-top: 120px;
+}
+.body-container a {
+    text-align: center;
+    display: block; /* Pour occuper toute la largeur disponible */
+    margin-top: 20px; /* Ajoutez une marge si nécessaire */
+}
+.body-container h1{
+    margin-bottom: 60px; /* Ajoutez une marge si nécessaire */
+}
+
+
+.form-container form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centre le contenu du formulaire */
+}
+
+/* Styles pour les champs du formulaire */
+.form-container input,
+.form-container select,
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Styles pour le bouton du formulaire */
+.form-container button {
+    background: #047ffc;
+    padding: 10px 25px;
+    display: inline-block; /* Affiche le bouton en tant que bloc en ligne */
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	
+}
+
+.form-container button:hover {
+    background: #0250d5;
+}
+
+/* Style pour le conteneur de la table */
+.table-container {
+    max-width: 1000px; /* Définissez la largeur maximale que vous souhaitez */
+    margin: 0 auto; /* Centre la table à l'intérieur du conteneur */
+    margin-bottom: 120px;
+}
+
+/* Reste du style pour la table, les en-têtes, les lignes, les cellules, les liens, etc. */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table td {
+    padding: 10px;
+}
+
+.table td a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}
+#searchInput {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#searchInput::placeholder {
+    color: #999;
+}
+
+#searchInput:hover {
+    border-color: #999;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #047ffc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+#sendSmsLink {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #28a745; /* Vert */
+    color: #fff; /* Texte blanc */
+    text-decoration: none; /* Supprime la soulignement par défaut des liens */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+#sendSmsLink:hover {
+    background-color: #218838; /* Vert plus foncé au survol */
+}
+.link-space {
+    margin-right: 7px; /* Ajustez la valeur selon l'espace souhaité */
+}
+    </style>
+    {%endblock%}
+    
     
 {% endblock %}
