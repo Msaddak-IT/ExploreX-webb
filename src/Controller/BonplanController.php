@@ -78,4 +78,17 @@ class BonplanController extends AbstractController
 
         return $this->redirectToRoute('app_bonplan_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/bonplans', name: 'showBonplansWithAvg', methods: ['GET'])]
+    public function getAllBonplans(BonplanRepository $bonplanRepository):Response
+    {
+        $bonplans=$bonplanRepository->findAll();
+        foreach ($bonplans as $bonplan){
+            $averageRating=$bonplan->calculateAverageRating();
+        }
+        return $this->render('bonplan/show.html.twig',[
+            'bonplans'=>$bonplans,
+        ]);
+    }
+
 }

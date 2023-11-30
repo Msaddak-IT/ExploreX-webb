@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\BonplanRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Expression;
+use http\Message;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -21,7 +23,10 @@ class Bonplan
     private ?string $nameBonPlan = null;
 
     #[ORM\Column]
-    #[Assert\LessThan(5,message: "tha ratiung must not be more than 5.0")]
+    #[Assert\LessThanOrEqual(
+        value: 5,
+        message: "The rating should be less than or equal to 5.0"
+    )]
     private ?float $rating = null;
 
     #[Assert\Expression(
@@ -46,6 +51,16 @@ class Bonplan
 
     #[ORM\ManyToOne(inversedBy: 'bonplans')]
     private ?TypeBonPlan $typeBonPlan = null;
+
+    #[ORM\OneToMany(mappedBy: 'bonplan', targetEntity: Rating::class)]
+    private Collection $ratings;
+
+    public function __construct()
+    {
+        $this->ratings = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -135,4 +150,55 @@ class Bonplan
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Rating>
+     */
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    public function addRating(Rating $rating): static
+    {
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings->add($rating);
+            $rating->setBonplan($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRating(Rating $rating): static
+    {
+        if ($this->ratings->removeElement($rating)) {
+            // set the owning side to null (unless already changed)
+            if ($rating->getBonplan() === $this) {
+                $rating->setBonplan(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function calculateAverageRating():?float{
+        $ratingList =$this->getRatings();
+        $sum=0;
+        foreach($ratingList as $rating){
+            $sum+=$rating->getRating();
+        }
+        return $ratingList->count()>0 ? $sum / $ratingList->count() : 0;
+    }
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function updateRating():void{
+        $this->rating=$this->calculateAverageRating();
+    }
+    public function __toString(): string
+    {
+        // Return a string that represents this object.
+        // For example, you might return the name of the Bonplan:
+        return $this->nameBonPlan;
+    }
+
 }

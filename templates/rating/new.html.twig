@@ -1,0 +1,11 @@
+{% extends 'frontbase.html.twig' %}
+{% block title %}
+<title>New Rating</title>
+{% endblock %}
+{% block body %}
+    <h1>Create new Rating</h1>
+
+    {{ include('rating/_form.html.twig') }}
+
+    <a href="{{ path('app_rating_index') }}">back to list</a>
+{% endblock %}

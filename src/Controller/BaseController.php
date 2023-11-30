@@ -20,4 +20,11 @@ class BaseController extends AbstractController
     {
         return  $this->render('backbase.html.twig');
     }
-  }
+    #[Route('/maps', name: 'maps')]
+    public function show_map(): Response
+    {
+        return $this->render('maps.html.twig');
+    }
+
+
+}
