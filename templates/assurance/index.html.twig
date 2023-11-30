@@ -1,0 +1,76 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}Assurance Index{% endblock %}
+
+{% block body1 %}
+    <h1 class="mb-4">Assurance Index</h1>
+
+    <div class="mb-3">
+        <label for="searchInput" class="form-label">Search:</label>
+        <input type="text" class="form-control" id="searchInput" oninput="searchAssurances()" />
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Id User</th>
+            <th>Id Categorie</th>
+            <th>Id Agence</th>
+            <th>Passeport</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for assurance in assurances %}
+            <tr>
+                <td>{{ assurance.id }}</td>
+                <td>{{ assurance.idUser }}</td>
+                <td>{{ assurance.idCategorie }}</td>
+                <td>{{ assurance.idAgence }}</td>
+                <td>{{ assurance.passeport }}</td>
+                <td>{{ assurance.destination }}</td>
+                <td>{{ assurance.date ? assurance.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_assurance_show', {'id': assurance.id}) }}" class="btn btn-info btn-sm">Show</a>
+                    <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_assurance_new') }}" class="btn btn-success">Create New</a>
+
+    <script>
+        function searchAssurances() {
+            const searchInput = document.getElementById('searchInput');
+            const filter = searchInput.value.toUpperCase();
+            const table = document.querySelector('table');
+            const rows = table.querySelectorAll('tbody tr');
+
+            rows.forEach((row) => {
+                const cols = row.getElementsByTagName('td');
+                let found = false;
+
+                for (let i = 0; i < cols.length; i++) {
+                    const cellText = cols[i].textContent || cols[i].innerText;
+
+                    if (cellText.toUpperCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                row.style.display = found ? '' : 'none';
+            });
+        }
+    </script>
+{% endblock %}

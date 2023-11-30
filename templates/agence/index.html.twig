@@ -1,0 +1,72 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Agence index{% endblock %}
+
+{% block body1 %}
+    <h1>Agence index</h1>
+
+    <div class="form-container">
+        <form method="get" action="{{ path('app_agence_index') }}" style="margin-bottom: 20px;">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" name="search" class="form-control" placeholder="Search" id="myInput">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>NomAgence</th>
+            <th>Adresse</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="myTable">
+        {% for agence in agences %}
+            {% if app.request.query.get('search') is empty or
+                app.request.query.get('search') in [agence.Id] or
+                app.request.query.get('search') in agence.NomAgence or
+                app.request.query.get('search') in agence.Adresse or
+                app.request.query.get('search') in agence.Telephone or
+                app.request.query.get('search') in agence.Email %}
+                <tr>
+                    <td>{{ agence.id }}</td>
+                    <td>{{ agence.nomAgence }}</td>
+                    <td>{{ agence.adresse }}</td>
+                    <td>{{ agence.telephone }}</td>
+                    <td>{{ agence.email }}</td>
+                    <td>
+                        <a href="{{ path('app_agence_show', {'id': agence.id}) }}" class="btn btn-info btn-sm">Show</a>
+                        <a href="{{ path('app_agence_edit', {'id': agence.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="6">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_agence_new') }}" class="btn btn-success">Create new</a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+{% endblock %}

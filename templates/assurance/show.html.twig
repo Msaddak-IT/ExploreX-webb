@@ -1,0 +1,46 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Assurance{% endblock %}
+
+{% block body1 %}
+    <h1>Assurance</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ assurance.id }}</td>
+            </tr>
+            <tr>
+                <th>IdUser</th>
+                <td>{{ assurance.idUser }}</td>
+            </tr>
+            <tr>
+                <th>IdCategorie</th>
+                <td>{{ assurance.idCategorie }}</td>
+            </tr>
+            <tr>
+                <th>IdAgence</th>
+                <td>{{ assurance.idAgence }}</td>
+            </tr>
+            <tr>
+                <th>Passeport</th>
+                <td>{{ assurance.passeport }}</td>
+            </tr>
+            <tr>
+                <th>Destination</th>
+                <td>{{ assurance.destination }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ assurance.date ? assurance.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_assurance_index') }}">back to list</a>
+
+    <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}">edit</a>
+
+    {{ include('assurance/_delete_form.html.twig') }}
+{% endblock %}

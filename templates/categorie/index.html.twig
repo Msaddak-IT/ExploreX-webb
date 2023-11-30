@@ -1,0 +1,97 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body1 %}
+    <h1>Categorie index</h1>
+
+    <div class="mb-3">
+        <label for="searchInput" class="form-label">Search:</label>
+        <input type="text" class="form-control" id="searchInput" oninput="searchCategories()" />
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th><button onclick="sortTable(0)">Id</button></th>
+            <th><button onclick="sortTable(1)">NomCategorie</button></th>
+            <th>Rating</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.nomCategorie }}</td>
+                <td>
+                    <div class="rating" data-category="{{ categorie.id }}" onmouseover="highlightStars(this)" onmouseout="resetStars(this)">
+                        {% for i in 1..5 %}
+                            <i class="fas fa-star" data-rating="{{ i }}" onclick="rateCategory({{ categorie.id }}, {{ i }})"></i>
+                        {% endfor %}
+                    </div>
+                    <span id="averageRating{{ categorie.id }}"></span>
+                </td>
+                <td>
+                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_new') }}" class="btn btn-success">Create new</a>
+
+    <script>
+        function searchCategories() {
+            // ... (comme dans votre exemple)
+        }
+
+        function sortTable(columnIndex) {
+            // ... (comme dans votre exemple)
+        }
+
+        function rateCategory(categoryId, rating) {
+            const stars = document.querySelectorAll(`.rating[data-category="${categoryId}"] .fa-star`);
+
+            stars.forEach(star => {
+                const currentRating = parseInt(star.dataset.rating);
+                star.classList.toggle('rated', currentRating <= rating);
+            });
+
+            updateAverageRating(categoryId);
+        }
+
+        function highlightStars(container) {
+            const stars = container.querySelectorAll('.fa-star');
+            stars.forEach(star => star.classList.add('hovered'));
+        }
+
+        function resetStars(container) {
+            const stars = container.querySelectorAll('.fa-star');
+            stars.forEach(star => star.classList.remove('hovered'));
+        }
+
+        function updateAverageRating(categoryId) {
+            const stars = document.querySelectorAll(`.rating[data-category="${categoryId}"] .fa-star`);
+            let totalRating = 0;
+            let ratedStars = 0;
+
+            stars.forEach(star => {
+                if (star.classList.contains('rated')) {
+                    totalRating += parseInt(star.dataset.rating);
+                    ratedStars++;
+                }
+            });
+
+            const averageRating = (ratedStars > 0) ? totalRating / ratedStars : 0;
+            const averageRatingElement = document.getElementById(`averageRating${categoryId}`);
+            averageRatingElement.innerText = `Average Rating: ${averageRating.toFixed(1)}`;
+        }
+    </script>
+{% endblock %}

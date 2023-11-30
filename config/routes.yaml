@@ -1,0 +1,4 @@
+# config/routes.yaml
+generate_qrcode:
+    path: '/generate-qrcode'
+    controller: 'App\Controller\VotreController::generateQrCode'
