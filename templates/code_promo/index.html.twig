@@ -1,0 +1,38 @@
+{% extends 'back.html.twig' %}
+
+
+
+{% block body %}
+    <h1>CodePromo </h1>
+
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Valeur</th>
+                <th>Date d'expiration</th>
+                <th>details</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for code_promo in code_promos %}
+            <tr>
+                <td>{{ code_promo.id }}</td>
+                <td>{{ code_promo.code }}</td>
+                <td>{{ code_promo.valeur }}</td>
+                <td>{{ code_promo.datexpiration ? code_promo.datexpiration|date('Y-m-d') : '' }}</td>
+                <td><a href="{{ path('app_code_promo_show', {'id': code_promo.id}) }}">show</a></td>
+                <td><a href="{{ path('app_code_promo_edit', {'id': code_promo.id}) }}">edit</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_code_promo_new') }}">Add New</a>
+{% endblock %}

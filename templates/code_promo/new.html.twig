@@ -1,0 +1,12 @@
+{% extends 'back.html.twig' %}
+
+
+{%block body%}
+
+    <h1>New CodePromo</h1>
+
+    {{include('code_promo/_form.html.twig')}}
+    <a href="{{ path('app_code_promo_new') }}">back to home</a>
+
+
+{%endblock%}
