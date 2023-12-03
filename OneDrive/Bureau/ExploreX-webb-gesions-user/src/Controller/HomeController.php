@@ -17,7 +17,7 @@ class HomeController extends AbstractController
     #[Route('/accueil', name: 'app_accueil')]
     public function accueil(FlashyNotifier $flashy): Response
     {
-        $flashy->success('Welcome!');
+        $this->addFlash('success', 'Welcome To ExploreX. Ready for a New Adventure ?');
 
         return $this->render('base/index.html.twig');
     }
