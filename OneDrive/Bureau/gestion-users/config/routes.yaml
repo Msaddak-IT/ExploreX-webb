@@ -1,9 +1,0 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-app_code_promo_show:
-  path: '/codepromo/{id}'
-  controller: 'App\Controller\CodePromoController::show'
-  methods: ['GET']
-  requirements:
-    id: '\d+'
