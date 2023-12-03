@@ -1,0 +1,12 @@
+
+
+# Web Debug Toolbar
+web_profiler_wdt:
+    resource: '@WebProfilerBundle/Resources/config/routing/wdt.xml'
+    prefix: /_wdt
+
+# Web Profiler
+web_profiler_profiler:
+    resource: '@WebProfilerBundle/Resources/config/routing/profiler.xml'
+    prefix: /_profiler
+
