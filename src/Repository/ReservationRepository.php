@@ -81,26 +81,20 @@ public function isTypeActiviteAvailableForCurrentSeason(string $typeActivite): b
     // Récupérez la saison actuelle
     $currentSeason = $this->getCurrentSeason();
 
-    // Liste des activités non disponibles en hiver
-    $activitesNonDisponiblesEnHiver = ['Plongée sous-marine', 'Excursion en bateau'];
-
-    // Vérifiez si l'activité spécifiée est dans la liste des activités non disponibles pour la saison actuelle
-    if ($currentSeason === 'hiver' && in_array($typeActivite, $activitesNonDisponiblesEnHiver)) {
-        return false; // L'activité n'est pas disponible en hiver
-    }
-
     // Par exemple, vérifiez s'il y a des réservations existantes pour ce type d'activité et cette saison
     $existingReservations = $this->createQueryBuilder('r')
         ->andWhere('r.typeactivite = :typeActivite')
-        ->andWhere('r.saison = :saison')
+        ->andWhere('r.datedebut <= :currentDate')
+        ->andWhere('r.datefin >= :currentDate')
         ->setParameter('typeActivite', $typeActivite)
-        ->setParameter('saison', $currentSeason)
+        ->setParameter('currentDate', new \DateTime('now'))
         ->getQuery()
         ->getResult();
 
     // Si des réservations existent pour cette saison et ce type d'activité, le type d'activité n'est pas disponible
     return empty($existingReservations);
 }
+
 private function getCurrentSeason(): string
     {
         $currentDate = new DateTime('now');
