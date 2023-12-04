@@ -3,70 +3,101 @@
 {% block title %}Agence index{% endblock %}
 
 {% block body1 %}
-    <h1>Agence index</h1>
+    <h1 style="color: #3498db;">Agence index</h1>
 
-    <div class="form-container">
-        <form method="get" action="{{ path('app_agence_index') }}" style="margin-bottom: 20px;">
-            <div class="form-row">
-                <div class="col">
-                    <input type="text" name="search" class="form-control" placeholder="Search" id="myInput">
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+    <div class="mb-3">
+        <label for="searchInput" class="form-label" style="color: #2ecc71;">Search:</label>
+        <input type="text" class="form-control" id="searchInput" oninput="searchAndSortAgences()" style="border-color: #2ecc71; color: #3498db;" />
     </div>
 
-    <table class="table">
-        <thead>
+    <table class="table" id="agenceTable" style="border: 2px solid #3498db;">
+        <thead style="background-color: #3498db; color: #fff;">
         <tr>
-            <th>Id</th>
-            <th>NomAgence</th>
-            <th>Adresse</th>
-            <th>Telephone</th>
-            <th>Email</th>
+            <th><button class="btn btn-link" onclick="sortTable(0)" style="color: #fff;">Id</button></th>
+            <th><button class="btn btn-link" onclick="sortTable(1)" style="color: #fff;">NomAgence</button></th>
+            <th><button class="btn btn-link" onclick="sortTable(2)" style="color: #fff;">Adresse</button></th>
+            <th><button class="btn btn-link" onclick="sortTable(3)" style="color: #fff;">Telephone</button></th>
+            <th><button class="btn btn-link" onclick="sortTable(4)" style="color: #fff;">Email</button></th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody id="myTable">
         {% for agence in agences %}
-            {% if app.request.query.get('search') is empty or
-                app.request.query.get('search') in [agence.Id] or
-                app.request.query.get('search') in agence.NomAgence or
-                app.request.query.get('search') in agence.Adresse or
-                app.request.query.get('search') in agence.Telephone or
-                app.request.query.get('search') in agence.Email %}
-                <tr>
-                    <td>{{ agence.id }}</td>
-                    <td>{{ agence.nomAgence }}</td>
-                    <td>{{ agence.adresse }}</td>
-                    <td>{{ agence.telephone }}</td>
-                    <td>{{ agence.email }}</td>
-                    <td>
-                        <a href="{{ path('app_agence_show', {'id': agence.id}) }}" class="btn btn-info btn-sm">Show</a>
-                        <a href="{{ path('app_agence_edit', {'id': agence.id}) }}" class="btn btn-warning btn-sm">Edit</a>
-                    </td>
-                </tr>
-            {% endif %}
+            <tr>
+                <td>{{ agence.id }}</td>
+                <td>{{ agence.nomAgence }}</td>
+                <td>{{ agence.adresse }}</td>
+                <td>{{ agence.telephone }}</td>
+                <td>{{ agence.email }}</td>
+                <td>
+                    <a href="{{ path('app_agence_show', {'id': agence.id}) }}" class="btn btn-info btn-sm" style="background-color: #3498db; color: #fff;">Show</a>
+                    <a href="{{ path('app_agence_edit', {'id': agence.id}) }}" class="btn btn-warning btn-sm" style="background-color: #f39c12; color: #fff;">Edit</a>
+                </td>
+            </tr>
         {% else %}
             <tr>
-                <td colspan="6">No records found</td>
+                <td colspan="6" style="text-align: center; color: #e74c3c;">No records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_agence_new') }}" class="btn btn-success">Create new</a>
+    <a href="{{ path('app_agence_new') }}" class="btn btn-success" style="background-color: #2ecc71; color: #fff;">Create new</a>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
+        function searchAndSortAgences() {
+            searchAgences();
+            sortTable(0); // Trier par défaut par Id après la recherche
+        }
 
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
+        function searchAgences() {
+            const searchInput = document.getElementById('searchInput');
+            const filter = searchInput.value.toUpperCase();
+            const table = document.getElementById('agenceTable');
+            const rows = table.querySelectorAll('tbody tr');
+
+            rows.forEach((row) => {
+                const cols = row.getElementsByTagName('td');
+                let found = false;
+
+                for (let i = 0; i < cols.length; i++) {
+                    const cellText = cols[i].textContent || cols[i].innerText;
+
+                    if (cellText.toUpperCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                row.style.display = found ? '' : 'none';
             });
-        });
+        }
+
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("agenceTable");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                rows = table.getElementsByTagName("tr");
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
     </script>
 {% endblock %}

@@ -3,57 +3,99 @@
 {% block title %}Categorie index{% endblock %}
 
 {% block body1 %}
-    <h1>Categorie index</h1>
+    <h1 style="color: #3498db;">Categorie index</h1>
 
     <div class="mb-3">
-        <label for="searchInput" class="form-label">Search:</label>
-        <input type="text" class="form-control" id="searchInput" oninput="searchCategories()" />
+        <label for="searchInput" class="form-label" style="color: #e74c3c;">Search:</label>
+        <input type="text" class="form-control" id="searchInput" oninput="searchAndSortCategories()" style="border-color: #e74c3c; color: #3498db;" />
     </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th><button onclick="sortTable(0)">Id</button></th>
-            <th><button onclick="sortTable(1)">NomCategorie</button></th>
-            <th>Rating</th>
-            <th>Actions</th>
-        </tr>
+    <table class="table table-bordered" id="categorieTable" style="border: 2px solid #3498db;">
+        <thead style="background-color: #3498db; color: #fff;">
+            <tr>
+                <th><button class="btn btn-info" onclick="sortTable(0)" style="color: #fff;">Id</button></th>
+                <th><button class="btn btn-info" onclick="sortTable(1)" style="color: #fff;">NomCategorie</button></th>
+                <th>Rating</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
-        {% for categorie in categories %}
-            <tr>
-                <td>{{ categorie.id }}</td>
-                <td>{{ categorie.nomCategorie }}</td>
-                <td>
-                    <div class="rating" data-category="{{ categorie.id }}" onmouseover="highlightStars(this)" onmouseout="resetStars(this)">
-                        {% for i in 1..5 %}
-                            <i class="fas fa-star" data-rating="{{ i }}" onclick="rateCategory({{ categorie.id }}, {{ i }})"></i>
-                        {% endfor %}
-                    </div>
-                    <span id="averageRating{{ categorie.id }}"></span>
-                </td>
-                <td>
-                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-primary">Show</a>
-                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">No records found</td>
-            </tr>
-        {% endfor %}
+            {% for categorie in categories %}
+                <tr>
+                    <td>{{ categorie.id }}</td>
+                    <td>{{ categorie.nomCategorie }}</td>
+                    <td>
+                        <div class="rating" data-category="{{ categorie.id }}" onmouseover="highlightStars(this)" onmouseout="resetStars(this)">
+                            {% for i in 1..5 %}
+                                <i class="fas fa-star" data-rating="{{ i }}" onclick="rateCategory({{ categorie.id }}, {{ i }})"></i>
+                            {% endfor %}
+                        </div>
+                        <span id="averageRating{{ categorie.id }}"></span>
+                    </td>
+                    <td>
+                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-primary" style="background-color: #3498db; color: #fff;">Show</a>
+                        <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-warning" style="background-color: #f39c12; color: #fff;">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" style="text-align: center; color: #e74c3c;">No records found</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_categorie_new') }}" class="btn btn-success">Create new</a>
+    <a href="{{ path('app_categorie_new') }}" class="btn btn-success" style="background-color: #2ecc71; color: #fff;">Create new</a>
 
     <script>
-        function searchCategories() {
-            // ... (comme dans votre exemple)
+        function searchAndSortCategories() {
+            const searchInput = document.getElementById('searchInput').value.toUpperCase();
+            const rows = document.querySelectorAll('#categorieTable tbody tr');
+
+            rows.forEach(row => {
+                const cols = row.getElementsByTagName('td');
+                let found = false;
+
+                for (let i = 0; i < cols.length; i++) {
+                    const cellText = cols[i].textContent || cols[i].innerText;
+
+                    if (cellText.toUpperCase().indexOf(searchInput) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                row.style.display = found ? '' : 'none';
+            });
+
+            sortTable(0); // Tri par défaut par Id après la recherche
         }
 
         function sortTable(columnIndex) {
-            // ... (comme dans votre exemple)
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("categorieTable");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                rows = table.getElementsByTagName("tr");
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
         }
 
         function rateCategory(categoryId, rating) {

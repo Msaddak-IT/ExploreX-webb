@@ -3,14 +3,14 @@
 {% block title %}New Categorie{% endblock %}
 
 {% block body1 %}
-    <h1>Create new Categorie</h1>
+    <h1 style="color: #3498db;">Create New Categorie</h1>
 
     <!-- Vos champs de formulaire existants -->
     {{ include('categorie/_form.html.twig') }}
 
-    <button type="button" onclick="validateAndSubmit()">Submit</button>
+    <button type="button" onclick="validateAndSubmit()" class="btn btn-success" style="background-color: #2ecc71; color: #fff; margin-top: 15px;">Submit</button>
 
-    <a href="{{ path('app_categorie_index') }}">back to list</a>
+    <a href="{{ path('app_categorie_index') }}" class="btn btn-info mt-3" style="background-color: #3498db; color: #fff;">Back to List</a>
 
     <script>
         function validateAndSubmit() {

@@ -1,26 +1,25 @@
 {% extends 'backbase.html.twig' %}
 
-
 {% block title %}Assurance Index{% endblock %}
 
 {% block body1 %}
-    <h1 class="mb-4">Assurance Index</h1>
+    <h1 style="color: #e67e22;">Assurance Index</h1>
 
     <div class="mb-3">
-        <label for="searchInput" class="form-label">Search:</label>
-        <input type="text" class="form-control" id="searchInput" oninput="searchAssurances()" />
+        <label for="searchInput" class="form-label" style="color: #3498db;">Search:</label>
+        <input type="text" class="form-control" id="searchInput" oninput="searchAndSortAssurances()" style="border-color: #3498db; color: #3498db;" />
     </div>
 
-    <table class="table">
-        <thead class="thead-dark">
+    <table class="table table-bordered" id="assuranceTable" style="border: 2px solid #3498db;">
+        <thead style="background-color: #3498db; color: #fff;">
         <tr>
-            <th>Id</th>
-            <th>Id User</th>
-            <th>Id Categorie</th>
-            <th>Id Agence</th>
-            <th>Passeport</th>
-            <th>Destination</th>
-            <th>Date</th>
+            <th><button class="btn btn-warning" onclick="sortTable(0)" style="color: #fff;">Id</button></th>
+            <th><button class="btn btn-warning" onclick="sortTable(1)" style="color: #fff;">Id User</button></th>
+            <th><button class="btn btn-warning" onclick="sortTable(2)" style="color: #fff;">Id Categorie</button></th>
+            <th><button class="btn btn-warning" onclick="sortTable(3)" style="color: #fff;">Id Agence</button></th>
+            <th><button class="btn btn-warning" onclick="sortTable(4)" style="color: #fff;">Passeport</button></th>
+            <th><button class="btn btn-warning" onclick="sortTable(5)" style="color: #fff;">Destination</button></th>
+            <th><button class="btn btn-warning" onclick="sortTable(6)" style="color: #fff;">Date</button></th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -35,25 +34,30 @@
                 <td>{{ assurance.destination }}</td>
                 <td>{{ assurance.date ? assurance.date|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_assurance_show', {'id': assurance.id}) }}" class="btn btn-info btn-sm">Show</a>
-                    <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ path('app_assurance_show', {'id': assurance.id}) }}" class="btn btn-info btn-sm" style="background-color: #3498db; color: #fff;">Show</a>
+                    <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-warning btn-sm" style="background-color: #e67e22; color: #fff;">Edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">No records found</td>
+                <td colspan="8" style="text-align: center; color: #e74c3c;">No records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_assurance_new') }}" class="btn btn-success">Create New</a>
+    <a href="{{ path('app_assurance_new') }}" class="btn btn-success" style="background-color: #2ecc71; color: #fff;">Create New</a>
 
     <script>
+        function searchAndSortAssurances() {
+            searchAssurances();
+            sortTable(0); // Tri par défaut par Id après la recherche
+        }
+
         function searchAssurances() {
             const searchInput = document.getElementById('searchInput');
             const filter = searchInput.value.toUpperCase();
-            const table = document.querySelector('table');
+            const table = document.getElementById('assuranceTable');
             const rows = table.querySelectorAll('tbody tr');
 
             rows.forEach((row) => {
@@ -71,6 +75,33 @@
 
                 row.style.display = found ? '' : 'none';
             });
+        }
+
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("assuranceTable");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                rows = table.getElementsByTagName("tr");
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
         }
     </script>
 {% endblock %}

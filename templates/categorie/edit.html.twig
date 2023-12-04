@@ -3,11 +3,11 @@
 {% block title %}Edit Categorie{% endblock %}
 
 {% block body1 %}
-    <h1>Edit Categorie</h1>
+    <h1 class="mb-4" style="color: #3498db;">Edit Categorie</h1>
 
     {{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_categorie_index') }}">back to list</a>
+    <a href="{{ path('app_categorie_index') }}" class="btn btn-info mt-3" style="background-color: #3498db; color: #fff;">Back to List</a>
 
     {{ include('categorie/_delete_form.html.twig') }}
 {% endblock %}
