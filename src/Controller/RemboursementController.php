@@ -33,6 +33,7 @@ class RemboursementController extends AbstractController
             $entityManager->persist($remboursement);
             $entityManager->flush();
 
+            $this->addFlash('success' , 'Ton remboursement a été sauvegardé avec succés');
             return $this->redirectToRoute('app_remboursement_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -42,13 +43,6 @@ class RemboursementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_remboursement_show', methods: ['GET'])]
-    public function show(Remboursement $remboursement): Response
-    {
-        return $this->render('remboursement/show.html.twig', [
-            'remboursement' => $remboursement,
-        ]);
-    }
 
     #[Route('/{id}/edit', name: 'app_remboursement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Remboursement $remboursement, EntityManagerInterface $entityManager): Response
@@ -59,6 +53,7 @@ class RemboursementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success' , 'Ton remboursemenet a été modifié avec succés');
             return $this->redirectToRoute('app_remboursement_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -74,8 +69,22 @@ class RemboursementController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$remboursement->getId(), $request->request->get('_token'))) {
             $entityManager->remove($remboursement);
             $entityManager->flush();
+    
+            $this->addFlash('success', 'Ton remboursement a été supprimé avec succès');
+        } else {
+            $this->addFlash('danger', 'La suppression du remboursement a échoué');
         }
-
+    
         return $this->redirectToRoute('app_remboursement_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+    #[Route('/{id}', name: 'app_remboursement_show', methods: ['GET'])]
+    public function show(Remboursement $remboursement): Response
+    {
+      
+        return $this->render('remboursement/show.html.twig', [
+            'remboursement' => $remboursement,
+        ]);
+    }
+    
 }

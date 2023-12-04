@@ -38,6 +38,12 @@
             "./migrations/.gitignore"
         ]
     },
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+    },
+    "php-flasher/flasher-symfony": {
+        "version": "v1.15.3"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {

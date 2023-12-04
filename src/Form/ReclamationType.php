@@ -12,17 +12,56 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class ReclamationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type')
-            ->add('nom')
-            ->add('description')
+            ->add('type', TextType::class, [
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'Le champ type est obligatoire.',
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^[A-Za-z\s]*$/',
+                        'message' => 'Le champ type ne doit contenir que des caractères alphabétiques .',
+                    ]),
+                ],
+            ])
+            ->add('nom', TextType::class, [
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'Le champ nom est obligatoire.',
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^[A-Za-z\s]*$/',
+                        'message' => 'Le champ nom ne doit contenir que des caractères alphabétiques .',
+                    ]),
+                ],
+            ])
+            ->add('description', TextType::class, [
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'Le champ description est obligatoire.',
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^[A-Za-z\s]*$/',
+                        'message' => 'Le champ description ne doit contenir que des caractères alphabétiques .',
+                    ]),
+                ],
+            ])
+        
+
+        
+
             ->add('datet_reclama')
-            ->add('submit',SubmitType::class)
+           
 
         ;
     }

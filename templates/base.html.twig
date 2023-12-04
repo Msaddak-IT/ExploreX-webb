@@ -38,6 +38,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //google fonts -->
 
 </head>
+{% for type, messages in app.flashes(['success', 'danger','info']) %}
+    {% for message in messages %}
+
+<div class="alert alert-{{ type }} text-center mb-0"> {{ message}} </div>
+    {% endfor %}
+{% endfor %}
 
 
 
