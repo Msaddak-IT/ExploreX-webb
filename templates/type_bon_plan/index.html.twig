@@ -1,0 +1,35 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}TypeBonPlan index{% endblock %}
+
+{% block body1 %}
+    <h1>TypeBonPlan index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomTypeBonPlan</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_bon_plan in type_bon_plans %}
+            <tr>
+                <td>{{ type_bon_plan.id }}</td>
+                <td>{{ type_bon_plan.nomTypeBonPlan }}</td>
+                <td>
+                    <a href="{{ path('app_type_bon_plan_show', {'id': type_bon_plan.id}) }}">show</a>
+                    <a href="{{ path('app_type_bon_plan_edit', {'id': type_bon_plan.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_bon_plan_new') }}">Create new</a>
+{% endblock %}

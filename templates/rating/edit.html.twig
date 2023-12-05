@@ -1,0 +1,14 @@
+
+{% extends 'backbase.html.twig' %}
+
+
+{% block body1 %}
+    <title>Edit Rating</title>
+    <h1>Edit Rating</h1>
+
+    {{ include('rating/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_rating_index') }}">back to list</a>
+
+    {{ include('rating/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'baseback.html.twig' %}
+
+
+{% block main %}
+ <h1>Client avec le plus de locations</h1>
+{% if mostFrequentCin %}
+    <p>CIN du client : {{ mostFrequentCin }}</p>
+{% else %}
+    <p>Aucun client trouvé.</p>
+{% endif %}
+
+{% endblock %}

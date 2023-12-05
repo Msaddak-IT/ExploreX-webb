@@ -1,0 +1,39 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="Login-form">
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.CIN) }}
+
+    {{ form_row(registrationForm.Name) }}
+        {{ form_row(registrationForm.Surename) }}
+
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+    {{ form_row(registrationForm.recaptcha) }}
+    {{ form_errors(registrationForm.recaptcha) }}
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+    {{ form_end(registrationForm) }}
+
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+</div>
+
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Vehicule index{% endblock %}
+
+{% block main %}
+    <h1 style="text-align: center; margin-top: 50px;margin-bottom: 50px;">List of vehicles</h1>
+    
+
+    <div>
+    <a href="{{ path('app_vehicule_index', {'sort': 'asc'}) }}" class="btn btn-primary">Ascending Sort</a>
+    <a href="{{ path('app_vehicule_index', {'sort': 'desc'}) }}" class="btn btn-primary">Descending Sort</a>
+    </div>
+    <input type="text" id="searchInput" placeholder="Search" />
+    
+        <table class="table">
+    <thead>
+        <tr>
+            <th>Matricule</th>
+            <th>Type of vehicle</th>
+            <th>Brand</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vehicule in vehicules %}
+                <tr>
+                   <td class="search-matricule">{{ vehicule.matricule }}</td>
+                   <td class="search-type">{{ vehicule.typeVehicule }}</td>
+                   <td class="search-marque">{{ vehicule.marqueVehicule }}</td>
+                    <td>
+                        <a href="{{ path('app_vehicule_show', {'matricule': vehicule.matricule}) }}">Show</a>
+                        <a href="{{ path('app_vehicule_edit', {'matricule': vehicule.matricule}) }}">Edit</a>
+                    </td>
+                </tr>
+           
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    
+
+
+    <div style="text-align: center;">
+    <a href="{{ path('app_vehicule_new') }}">Create new</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("input", function () {
+            var value = $(this).val().toLowerCase();
+
+            $("tbody tr").filter(function () {
+                var row = $(this);
+                var matriculeMatch = row.find(".search-matricule").text().toLowerCase().includes(value);
+                var typeMatch = row.find(".search-type").text().toLowerCase().includes(value);
+                var marqueMatch = row.find(".search-marque").text().toLowerCase().includes(value);
+
+                row.toggle(matriculeMatch || typeMatch || marqueMatch);
+            });
+        });
+    });
+</script>
+        {% block style %}
+    <style>
+  
+/* Style pour le conteneur de la table */
+.table-container {
+    max-width: 1000px; /* Définissez la largeur maximale que vous souhaitez */
+    margin: 0 auto; /* Centre la table à l'intérieur du conteneur */
+    margin-bottom: 120px;
+}
+
+/* Reste du style pour la table, les en-têtes, les lignes, les cellules, les liens, etc. */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table td {
+    padding: 10px;
+}
+
+.table td a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}
+#searchInput {
+    width: 50%; /* Vous pouvez ajuster la largeur selon vos préférences */
+    margin: 0 auto; /* Pour le centrer horizontalement */
+    display: block; /* Pour occuper la largeur spécifiée plutôt que la largeur complète de son conteneur */
+    padding: 10px; 
+    margin-top:80px;
+    margin-bottom:80px;
+}
+#searchInput {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#searchInput::placeholder {
+    color: #999;
+}
+
+#searchInput:hover {
+    border-color: #999;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #047ffc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+    </style>
+    </style>
+    {%endblock%}
+{% endblock %}

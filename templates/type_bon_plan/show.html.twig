@@ -1,0 +1,25 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block body1 %}
+    <h1>TypeBonPlan</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type_bon_plan.id }}</td>
+            </tr>
+            <tr>
+                <th>NomTypeBonPlan</th>
+                <td>{{ type_bon_plan.nomTypeBonPlan }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_bon_plan_index') }}">back to list</a>
+
+    <a href="{{ path('app_type_bon_plan_edit', {'id': type_bon_plan.id}) }}">edit</a>
+
+    {{ include('type_bon_plan/_delete_form.html.twig') }}
+{% endblock %}

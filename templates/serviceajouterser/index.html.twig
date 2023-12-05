@@ -1,0 +1,86 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Reservations index{% endblock %}
+
+        
+    
+
+       
+
+{% block main %}
+    <h1>Service index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+              
+                <th>NomService</th>
+                <th>DescriptionService</th>
+                <th>PrixService</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                
+                <td>{{ service.nomService }}</td>
+                <td>{{ service.descriptionService }}</td>
+                <td>{{ service.prixService }}</td>
+                <td>
+                    <a href="{{ path('app_serviceajouterser_show', {'idService': service.idService}) }}">show</a>
+                    <a href="{{ path('app_serviceajouterser_edit', {'idService': service.idService}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_serviceajouterser_new') }}">Create new</a>
+      <style>
+
+  
+/* Style pour le conteneur de la table */
+.table-container {
+    max-width: 1000px; /* Définissez la largeur maximale que vous souhaitez */
+    margin: 0 auto; /* Centre la table à l'intérieur du conteneur */
+    margin-bottom: 120px;
+}
+
+/* Reste du style pour la table, les en-têtes, les lignes, les cellules, les liens, etc. */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table td {
+    padding: 10px;
+}
+
+.table td a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}
+</style>
+{% endblock %}

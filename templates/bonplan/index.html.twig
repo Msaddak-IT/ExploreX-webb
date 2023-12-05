@@ -1,0 +1,46 @@
+{% extends 'frontbase.html.twig' %}
+
+
+{% block body %}
+    <link href="{{ asset('css/form_style.css') }}" rel="stylesheet">
+
+    <h1>Bonplan index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NameBonPlan</th>
+                <th>Rating</th>
+                <th>StartDate</th>
+                <th>EndDate</th>
+                <th>AvgPrice</th>
+                <th>Location</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bonplan in bonplans %}
+            <tr>
+                <td>{{ bonplan.id }}</td>
+                <td>{{ bonplan.nameBonPlan }}</td>
+                <td>{{ bonplan.rating }}</td>
+                <td>{{ bonplan.startDate ? bonplan.startDate|date('Y-m-d') : '' }}</td>
+                <td>{{ bonplan.endDate ? bonplan.endDate|date('Y-m-d') : '' }}</td>
+                <td>{{ bonplan.avgPrice }}</td>
+                <td>{{ bonplan.location }}</td>
+                <td>
+                    <a href="{{ path('app_bonplan_show', {'id': bonplan.id}) }}" class="btnTable">show</a>
+                    <a href="{{ path('app_bonplan_edit', {'id': bonplan.id}) }}" class="btnTable">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bonplan_new') }}">Create new</a>
+{% endblock %}

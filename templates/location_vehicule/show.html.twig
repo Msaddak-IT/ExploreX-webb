@@ -1,0 +1,38 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Location Vehicule{% endblock %}
+
+{% block main %}
+    <h1 style="text-align: center; margin-top: 50px;margin-bottom: 50px;">LocationVehicule</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CIN Client</th>
+                <td>{{ location_vehicule.cinClientVehicule }}</td>
+            </tr>
+            <tr>
+                <th>Rental duration</th>
+                <td>{{ location_vehicule.dureeLocVehicule }}</td>
+            </tr>
+            <tr>
+                <th>Pick-up date</th>
+                <td>{{ location_vehicule.pickupVehicule ? location_vehicule.Pickupvehicule|date('Y-m-d') : ''}}</td>
+            </tr>
+            <tr>
+                <th>Return date</th>
+                <td>{{ location_vehicule.returnVehicule ? location_vehicule.Returnvehicule|date('Y-m-d') : ''}}</td>
+            </tr>
+            <tr>
+                <th>Full price</th>
+                <td>{{ location_vehicule.montantLocation }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="{{ path('app_location_vehicule_index') }}">Back to list</a>
+    <br>
+    <a href="{{ path('app_location_vehicule_edit', {'id_loc_vehicule': location_vehicule.Idlocvehicule}) }}">Edit</a>
+
+    {{ include('location_vehicule/_delete_form.html.twig') }}
+{% endblock %}

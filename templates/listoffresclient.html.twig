@@ -1,0 +1,257 @@
+{% extends 'basenew.html.twig' %}
+
+{% block title %}Offres index{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <!-- Ajoutez ce lien pour inclure le script Slick Slider -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+    #searchForm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    #searchForm div {
+        margin-right: 10px;
+    }
+
+    #searchForm label {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    #searchForm input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    #searchForm input[type="text"]:focus {
+        border-color: #047ffc;
+    }
+
+    ..price-range-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .price-range {
+        width: 300px;
+        margin: 0 10px;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        margin: 10px 0;
+        cursor: pointer;
+        --webkit-appearance: none;
+        height: 10px;
+        border-radius: 5px;
+        /* Ajoutez un dégradé pour un meilleur look */
+        background: linear-gradient(to right, #047ffc 0%, #047ffc ${(300 - 50) / 200 * 100}%, #ddd ${(300 - 50) / 200 * 100}%, #ddd 100%);
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #047ffc;
+        border: 1px solid #047ffc;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 5px solid transparent;
+        background-clip: padding-box;
+    }
+
+.btn-like,
+    .btn-dislike {
+        background-color: #047ffc;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .btn-like i,
+    .btn-dislike i {
+        color: white;
+    }
+
+    #likesCount,
+    #dislikesCount {
+        color: white;
+    }
+
+</style>
+
+
+    <form id="searchForm">
+        <div>
+            <label for="destination">Destination :</label>
+            <input type="text" id="destinationInput" name="destination">
+        </div>
+        <div class="price-range-wrapper">
+            <label for="priceRange">Price Range:</label>
+            <div class="price-range">
+                <input type="range" id="priceRange" min="0" max="20000" step="1" value="50">
+                <div class="price-values">
+                    <span>0</span>
+                    <span id="rangeValue"></span>
+                
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div id="searchResults">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Destination</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th>Prix</th>
+                    <th>Service</th>
+                    <th></th>
+                      <th></th>
+                       <th></th>
+                </tr>
+            </thead>
+            <tbody id="offresTableBody">
+                {% for offre in offres %}
+                    <tr>
+                        <td>{{ offre.destination }}</td>
+                        <td>{{ offre.debut ? offre.debut|date('Y-m-d') : '' }}</td>
+                        <td>{{ offre.fin ? offre.fin|date('Y-m-d') : '' }}</td>
+                        <td>{{ offre.prix }}</td>
+                        <td>{{ offre.service.getNomService()}}</td>
+                        <td>
+                           <td>
+            <button class="btn-like" data-offre-id="{{ offre.idOffres }}" data-action="like">
+                <i class="far fa-thumbs-up"></i>
+                <p id="likesCount">Likes: <span id="likesCountValue-{{ offre.idOffres }}">0</span></p>
+            </button>
+            <button class="btn-dislike" data-offre-id="{{ offre.idOffres }}" data-action="dislike">
+                <i class="far fa-thumbs-down"></i>
+                <p id="dislikesCount">Dislikes: <span id="dislikesCountValue-{{ offre.idOffres }}">0</span></p>
+            </button>
+        </td>
+                        <td>
+                            <button class="btn" style="display: block; margin: auto;background-color: #047ffc; color: white;padding: 10px 25px;text-transform: uppercase;font-size: 14px;">Réserver</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            // Écoutez l'événement "input" sur le champ de texte
+            $('#destinationInput').on('input', function () {
+                triggerSearch(); // Déclenchez la recherche automatique
+            });
+
+            // Écoutez l'événement "input" sur le slider de plage de prix
+            $('#priceRange').on('input', function () {
+                updateSliderValue(); // Mettez à jour la valeur du slider
+                triggerSearch(); // Déclenchez la recherche automatique
+            });
+
+        });
+ document.addEventListener("DOMContentLoaded", function () {
+        // Initialiser les likes et dislikes depuis le stockage local
+        // Cela doit être fait au chargement de la page
+        initializeLikesAndDislikes();
+
+        var likeButtons = document.querySelectorAll('.btn-like');
+        var dislikeButtons = document.querySelectorAll('.btn-dislike');
+
+        likeButtons.forEach(function (likeButton) {
+            likeButton.addEventListener('click', function () {
+                handleLikeDislikeClick(this, 'like');
+            });
+        });
+
+        dislikeButtons.forEach(function (dislikeButton) {
+            dislikeButton.addEventListener('click', function () {
+                handleLikeDislikeClick(this, 'dislike');
+            });
+        });
+
+        function initializeLikesAndDislikes() {
+            // Parcourir chaque offre et mettre à jour les valeurs depuis le stockage local
+            {% for offre in offres %}
+                var offreId = {{ offre.idOffres }};
+                var likes = parseInt(localStorage.getItem('likes_' + offreId)) || 0;
+                var dislikes = parseInt(localStorage.getItem('dislikes_' + offreId)) || 0;
+
+                document.getElementById('likesCountValue-' + offreId).textContent = 'Likes: ' + likes;
+                document.getElementById('dislikesCountValue-' + offreId).textContent = 'Dislikes: ' + dislikes;
+            {% endfor %}
+        }
+
+        function handleLikeDislikeClick(button, action) {
+            var offreId = button.getAttribute('data-offre-id');
+            var likesCountElement = document.getElementById('likesCountValue-' + offreId);
+            var dislikesCountElement = document.getElementById('dislikesCountValue-' + offreId);
+
+            var likesCount = parseInt(likesCountElement.textContent.split(': ')[1]) || 0;
+            var dislikesCount = parseInt(dislikesCountElement.textContent.split(': ')[1]) || 0;
+
+            if (action === 'like') {
+                likesCount++;
+                localStorage.setItem('likes_' + offreId, likesCount);
+            } else if (action === 'dislike') {
+                dislikesCount++;
+                localStorage.setItem('dislikes_' + offreId, dislikesCount);
+            }
+
+            likesCountElement.textContent = 'Likes: ' + likesCount;
+            dislikesCountElement.textContent = 'Dislikes: ' + dislikesCount;
+        }
+    });
+
+
+
+
+        // Fonction pour déclencher la recherche automatique
+        function triggerSearch() {
+            var searchValue = $('#destinationInput').val().toLowerCase().trim(); // Obtenez la valeur de recherche et mettez-la en minuscules
+            var minPrice = parseFloat($('#priceRange').val()) || 0; // Obtenez la valeur minimale de prix
+
+            // Parcourez chaque ligne de la table des offres
+            $('#offresTableBody tr').each(function () {
+                var destination = $(this).find('td:first-child').text().toLowerCase(); // Obtenez la destination de chaque ligne et mettez-la en minuscules
+                var prix = parseFloat($(this).find('td:nth-child(4)').text()); // Obtenez le prix de chaque ligne
+
+                // Vérifiez si la destination commence par la valeur de recherche et si le prix est supérieur ou égal à la valeur minimale
+                if (destination.startsWith(searchValue) && prix >= minPrice) {
+                    $(this).show(); // Affichez la ligne si elle correspond à la recherche
+                } else {
+                    $(this).hide(); // Masquez la ligne si elle ne correspond pas à la recherche
+                }
+            });
+        }
+
+        // Fonction pour mettre à jour la valeur affichée du slider
+function updateSliderValue() {
+    $('#rangeValue').text(`TDN ${$('#priceRange').val()}`);
+}
+    </script>
+{% endblock %}

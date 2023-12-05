@@ -1,0 +1,41 @@
+<center>
+<div class="body-container">
+<div class="form-container">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+
+        {# Afficher les messages d'erreur globaux du formulaire #}
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_label(form.matricule) }}
+            {{ form_widget(form.matricule) }}
+             <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.matricule) }}
+            </div>
+           
+        </div>
+
+        <div>
+            {{ form_label(form.type_vehicule) }}
+            {{ form_widget(form.type_vehicule) }}
+            {{ form_errors(form.type_vehicule) }}
+           
+        </div>
+
+        <div>
+            {{ form_label(form.marque_vehicule) }}
+            {{ form_widget(form.marque_vehicule) }}
+            {{ form_errors(form.marque_vehicule) }}
+            
+        </div>
+
+        <div>
+            {{ form_widget(form.submit, {'label': button_label}) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+
+   
+</div>
+</center>

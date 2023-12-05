@@ -1,0 +1,21 @@
+{#
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+#}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/form_style.css') }}" rel="stylesheet">
+{% endblock %}
+
+{{ form_start(form) }}
+    {{ form_row(form.nameBonPlan, {'attr': {'class': 'your-custom-class'}}) }}
+    {{ form_row(form.rating, {'attr': {'class': 'your-custom-class'}}) }}
+    {{ form_row(form.startDate, {'attr': {'class': 'your-custom-class'}}) }}
+    {{ form_row(form.endDate, {'attr': {'class': 'your-custom-class'}}) }}
+    {{ form_row(form.avgPrice, {'attr': {'class': 'your-custom-class'}}) }}
+    {{ form_row(form.location, {'attr': {'class': 'your-custom-class'}}) }}
+    {{ form_row(form.typeBonPlan, {'attr': {'class': 'your-custom-class'}}) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

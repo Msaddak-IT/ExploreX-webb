@@ -1,0 +1,105 @@
+<center>
+<div class="body-container">
+<div class="form-container">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+
+        {# Afficher les messages d'erreur globaux du formulaire #}
+        {{ form_errors(form) }}
+          <div>
+            {{ form_label(form.destination) }}
+            {{ form_widget(form.destination) }}
+                <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.destination) }}
+           
+        </div>
+        <div>
+            {{ form_label(form.debut) }}
+            {{ form_widget(form.debut) }}
+                <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.debut) }}
+           
+        </div>
+         <div>
+            {{ form_label(form.fin) }}
+            {{ form_widget(form.fin) }}
+                <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.fin) }}
+           
+        </div>
+         <div>
+            {{ form_label(form.prix) }}
+            {{ form_widget(form.prix) }}
+                <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.prix) }}
+           
+        </div>
+        <div>
+            {{ form_label(form.service) }}
+            {{ form_widget(form.service) }}
+                <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.service) }}
+           
+        </div>
+
+         </table>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+</div>
+</div>
+</center>
+<style>
+.body-container  {
+    margin-bottom: 120px;
+    margin-top: 120px;
+}
+.body-container a {
+    text-align: center;
+    display: block; /* Pour occuper toute la largeur disponible */
+    margin-top: 20px; /* Ajoutez une marge si nécessaire */
+}
+.body-container h1{
+    margin-bottom: 60px; /* Ajoutez une marge si nécessaire */
+}
+
+
+.form-container form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centre le contenu du formulaire */
+}
+
+/* Styles pour les champs du formulaire */
+.form-container input,
+.form-container select,
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Styles pour le bouton du formulaire */
+.form-container button {
+    background: #047ffc;
+    padding: 10px 25px;
+    display: inline-block; /* Affiche le bouton en tant que bloc en ligne */
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.form-container button:hover {
+    background: #0250d5;
+}
+
+</style>

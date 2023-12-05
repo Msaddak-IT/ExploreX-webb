@@ -1,0 +1,47 @@
+
+
+{% extends 'back.html.twig' %}
+
+{% block body %}
+    <h1 style="text-align: center;">CodePromo Statistics</h1>
+
+    <p style="text-align: center;">Number of expired CodePromos: {{ expiredCodePromosCount }}</p>
+    <p style="text-align: center;">Number of not expired CodePromos: {{ notExpiredCodePromosCount }}</p>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <canvas id="categoryChart" width="400" height="200"></canvas>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('categoryChart').getContext('2d');
+            var data = {
+                labels: ['Expired CodePromos', 'Not Expired CodePromos'],
+                datasets: [{
+                    label: 'Number of CodePromos',
+                    data: [{{ expiredCodePromosCount }}, {{ notExpiredCodePromosCount }}],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                }]
+            };
+
+
+            var options = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            var categoryChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: options
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Reservations index{% endblock %}
+
+{% block main %}
+    <h1 style="margin-left:500px;">Liste des Réservations</h1>
+
+    <a href="{{ path('app_reservationsajout_index', {'sort': 'asc'}) }}" class="btn btn-primary">Ascending Sort</a>
+    <a href="{{ path('app_reservationsajout_index', {'sort': 'desc'}) }}" class="btn btn-primary">Descending Sort</a>
+  <a href="{{ path('app_stat', {'cinClient': reservations[1].getCinclient()}) }}" class="btn btn-primary">
+    View Statistics
+</a>
+
+
+
+    {# Formulaire de recherche avancée #}
+    <form id="advancedSearchForm">
+        <label for="search">Recherche avancée :</label>
+        <input type="text" id="search" name="search" placeholder="Entrez un terme de recherche">
+    </form>
+
+    <div class="table-container">
+        <table class="table" id="reservationTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CIN Client</th>
+                    <th>Nom Client</th>
+                    <th>Nombre Personnes</th>
+                    <th>Date Début</th>
+                    <th>Date Fin</th>
+                    <th>Mode Paiement</th>
+                    <th>Type Hébergement</th>
+                    <th>Type Activité</th>
+                    <th>Num Tel</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# Les lignes de la table seront insérées ici dynamiquement via JavaScript #}
+                {% include 'reservationsajout/_table_rows.html.twig' with {'reservations': reservations} %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#search").on("input", function () {
+            var value = $(this).val().toLowerCase();
+
+            $("tbody tr").filter(function () {
+                var row = $(this);
+                var columns = row.find("td");
+                var match = false;
+
+                // Check each column for a match
+                columns.each(function () {
+                    if ($(this).text().toLowerCase().includes(value)) {
+                        match = true;
+                        return false; // Break out of the loop if a match is found
+                    }
+                });
+
+                row.toggle(match);
+            });
+        });
+    });
+</script>
+<style>
+
+  
+/* Style pour le conteneur de la table */
+.table-container {
+    max-width: 1000px; /* Définissez la largeur maximale que vous souhaitez */
+    margin: 0 auto; /* Centre la table à l'intérieur du conteneur */
+    margin-bottom: 120px;
+}
+
+/* Reste du style pour la table, les en-têtes, les lignes, les cellules, les liens, etc. */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table td {
+    padding: 10px;
+}
+
+.table td a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}
+  #advancedSearchForm {
+            text-align: center;
+        }
+
+        #search {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+</style>
+
+{% endblock %}

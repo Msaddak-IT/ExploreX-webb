@@ -1,0 +1,71 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block head %}
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- Mapbox GL JS JavaScript -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+
+    <head>
+        <title>ExploreX</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="keywords" content="Grand Tour Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+
+        <!-- css files -->
+        <link href="{{ asset('css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
+        <link href="{{ asset('css/style.css') }}" rel='stylesheet' type='text/css' />
+        <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+        <!-- //css files -->
+
+        <!-- google fonts -->
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <!-- //google fonts -->
+        <style>
+
+
+            h1 {
+                text-align: center;
+            }
+        </style>
+    </head>
+{% endblock %}
+
+{% block body %}
+    <div id='map' style='width: 100%; height: 400px;'></div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    // Add your Mapbox access token
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5lczA1IiwiYSI6ImNscGt3dGxzZTAxOTAyanBydDRhNGg2eGIifQ.SraIoVeN8AFajqoAIpiOkw';
+
+    // Initialize the map
+    var map = new mapboxgl.Map({
+    // Map container id
+    container: 'map',
+    // Map style URL
+    style: 'mapbox://styles/mapbox/streets-v11',
+    // Map center coordinates
+    center: [10.1805, 36.8982],
+    // Map zoom level
+    zoom: 12
+});
+
+    // Add a navigation control to the map
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // Add a marker to the map
+    var marker = new mapboxgl.Marker()
+    .setLngLat([10.1805, 36.8982])
+    .addTo(map);
+
+    // Add a popup to the marker
+    var popup = new mapboxgl.Popup({ offset: 25 })
+    .setHTML('<h3>El Ghazela</h3><p>A city in Tunisia</p>')
+    .setLngLat([10.1805, 36.8982])
+    .addTo(map);
+</script>
+{% endblock %}

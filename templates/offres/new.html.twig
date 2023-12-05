@@ -1,0 +1,13 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}New offres{% endblock %}
+{% block main %}
+ <h1 style="text-align: center; margin-top: 50px;">Create new Offres</h1>
+
+   
+ {{ include('offres/_form.html.twig', {'button_label': 'Add'}) }}
+    <div style="text-align: center;">
+    <a href="{{ path('app_offres_index') }}">back to list</a>
+</div>
+     </div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{# templates/location_vehicule/historiqueLocation.html.twig #}
+
+{% extends 'basenew.html.twig' %}
+
+{% block title %}Historic of locations{% endblock %}
+
+{% block body %}
+{% for flash_message in app.session.flashbag.get('success') %}
+    <div class="alert alert-success flash-message">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+    <h1 style="text-align: center; margin-top: 50px;margin-bottom: 50px;">Historic of locations</h1>
+
+   <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>CIN client</th>
+                    <th>Rental duration</th>
+                    <th>Pick-up date</th>
+                    <th>Return date</th>
+                    <th>Full price</th>
+                    <th>Associated vehicle</th>
+                    <!-- Ajoutez d'autres colonnes au besoin -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for location_vehicule in locations %}
+                    <tr>
+                        <td>{{ location_vehicule.Cinclientvehicule }}</td>
+                        <td>{{ location_vehicule.Dureelocvehicule }}</td>
+                        <td>{{ location_vehicule.Pickupvehicule ? location_vehicule.Pickupvehicule|date('Y-m-d') : ''}}</td>
+                        <td>{{ location_vehicule.Returnvehicule ? location_vehicule.Returnvehicule|date('Y-m-d') : ''}}</td>
+                        <td>{{ location_vehicule.MontantLocation }} Dt</td>
+                        <td>{{ location_vehicule.Vehicules }}</td>
+                        <!-- Ajoutez d'autres colonnes au besoin -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   </div>
+
+    <a href="{{ path('app_acceuil') }}" class="btn btn-primary">Home </a>
+    <a href="{{ path('app_location_vehicule_new') }}" class="btn btn-primary">Back </a>
+    <style>
+        /* Animation de translation pour le message flash */
+       .flash-message {
+        position: fixed; /* Fixer la position pour que le message reste à droite */
+        top: 310px; /* Ajuster la position verticale si nécessaire */
+        right: -100%; /* Démarrer à droite de la page */
+        opacity: 0;
+        transition: opacity 0.5s, right 0.5s; /* Ajouter la transition vers la droite */
+        max-width: 300px; /* Limiter la largeur du flash message */
+        background-color: #4CAF50; /* Couleur de fond */
+        color: #fff; /* Couleur du texte */
+        padding: 15px; /* Rembourrage interne */
+        border-radius: 5px; /* Coins arrondis */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    }
+
+    .flash-message.show {
+        right: 20px; /* Arrêter à une certaine distance de la droite (ajuster si nécessaire) */
+        opacity: 1;
+    }
+    </style>
+
+    <script>
+        // Attendre que le DOM soit chargé
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sélectionner tous les éléments avec la classe flash-message
+        var flashMessages = document.querySelectorAll('.flash-message');
+
+        // Ajouter la classe show à chaque élément après un court délai
+        flashMessages.forEach(function(message) {
+            setTimeout(function() {
+                message.classList.add('show');
+            }, 100);
+            
+            // Supprimer la classe show après 10 secondes
+            setTimeout(function() {
+                message.classList.remove('show');
+            }, 5000);
+        });
+    });
+    </script>
+
+{% endblock %}

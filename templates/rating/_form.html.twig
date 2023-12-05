@@ -1,0 +1,9 @@
+{% block stylesheets %}
+    <link href="{{ asset('css/form_style.css') }}" rel="stylesheet">
+{% endblock %}
+
+{{ form_start(form) }}
+    {{ form_row(form.rating, {'attr': {'class': 'your-custom-class'}}) }}
+    {{ form_row(form.bonplan, {'attr': {'class': 'your-custom-class'}}) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

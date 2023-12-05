@@ -1,0 +1,13 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Edit TypeBonPlan{% endblock %}
+
+{% block body1%}
+    <h1>Edit TypeBonPlan</h1>
+
+    {{ include('type_bon_plan/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_type_bon_plan_index') }}">back to list</a>
+
+    {{ include('type_bon_plan/_delete_form.html.twig') }}
+{% endblock %}

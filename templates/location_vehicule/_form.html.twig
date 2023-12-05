@@ -1,0 +1,88 @@
+
+<div class="body-container">
+<div class="form-container">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+
+        {# Afficher les messages d'erreur globaux du formulaire #}
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_label(form.cin_client_vehicule) }}
+            {{ form_widget(form.cin_client_vehicule) }}
+             <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.cin_client_vehicule) }}
+            </div>
+           
+        </div>
+
+         <div>
+        {{ form_label(form.duree_loc_vehicule) }}
+        {{ form_widget(form.duree_loc_vehicule, {'attr': {'class': 'duree-input'}}) }}
+        <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.duree_loc_vehicule) }}
+        </div>
+    </div>
+
+        <div>
+            {{ form_label(form.pickup_vehicule) }}
+            {{ form_widget(form.pickup_vehicule) }}
+             <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.pickup_vehicule) }}
+            </div>
+            
+        </div>
+
+          <div>
+            {{ form_label(form.return_vehicule) }}
+            {{ form_widget(form.return_vehicule) }}
+             <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.return_vehicule) }}
+            </div>
+           
+        </div>
+
+         <div>
+        {{ form_label(form.montantLocation) }}
+        {{ form_widget(form.montantLocation, {'attr': {'class': 'montant-input', 'readonly': 'readonly'}}) }}
+        <div style="color: red; font-size: 14px; margin-top: 5px;">
+            {{ form_errors(form.montantLocation) }}
+        </div>
+    </div>
+
+        <div>
+            {{ form_label(form.vehicules) }}
+            {{ form_widget(form.vehicules) }}
+            {{ form_errors(form.vehicules) }}
+            
+        </div>
+        
+
+        <div>
+            {{ form_widget(form.submit, {'label': button_label}) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+
+   
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dureeInput = document.querySelector('.duree-input');
+        var montantInput = document.querySelector('.montant-input');
+
+        // Ajoutez un écouteur d'événements pour détecter les changements dans le champ de durée
+        dureeInput.addEventListener('input', function () {
+            var dureeValue = parseInt(dureeInput.value);
+
+            // Vérifiez si la valeur de la durée est un nombre valide
+            if (!isNaN(dureeValue)) {
+                // Effectuez le calcul du montant
+                var montant = dureeValue * 120;
+
+                // Mettez à jour le champ "montantLocation"
+                montantInput.value = montant;
+            }
+        });
+    });
+</script>

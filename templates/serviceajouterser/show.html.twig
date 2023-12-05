@@ -1,0 +1,35 @@
+{% extends 'baseback.html.twig' %}
+
+
+{% block title %}service{% endblock %}
+
+
+{% block main %}
+    <h1>Service</h1>
+
+    <table class="table">
+        <tbody>
+            
+            <tr>
+                <th>NomService</th>
+                <td>{{ service.nomService }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionService</th>
+                <td>{{ service.descriptionService }}</td>
+            </tr>
+            <tr>
+                <th>PrixService</th>
+                <td>{{ service.prixService }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_serviceajouterser_index') }}">back to list</a>
+
+    <a href="{{ path('app_serviceajouterser_edit', {'idService': service.idService}) }}">edit</a>
+
+    {{ include('serviceajouterser/_delete_form.html.twig') }}
+{% endblock %}
+
+
