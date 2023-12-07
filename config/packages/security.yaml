@@ -39,9 +39,28 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/login, roles: PUBLIC_ACCESS }
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/, roles: PUBLIC_ACCESS }
+        # - { path: ^/login, roles: PUBLIC_ACCESS }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/, roles: PUBLIC_ACCESS }
+    access_control:
+        - { path: "^/login", roles: PUBLIC_ACCESS }
+        - { path: "^/accueil", roles: PUBLIC_ACCESS }
+        - { path: "^/register", roles: PUBLIC_ACCESS }
+        - { path: "^/home", roles: PUBLIC_ACCESS }
+        - { path: "^/user", roles: PUBLIC_ACCESS }
+        - { path: "^/codepromo", roles: ROLE_ADMIN }
+        - { path: "^/admin", roles: ROLE_ADMIN }
+        - { path: "^/typebonplan", roles: ROLE_ADMIN }
+        - { path: "^/bonplan/", roles: PUBLIC_ACCESS }
+        - { path: "^/bonplan/new", roles: ROLE_USER }
+        - { path: "^/bonplan/{id}", roles: ROLE_ADMIN }
+        - { path: "^/bonplan/{id}/edit", roles: ROLE_USER }
+        - { path: "^/rating/new", roles: ROLE_USER }
+        - { path: "^/rating/{id}", roles: ROLE_ADMIN }
+        - { path: "^/rating/{id}/edit", roles: ROLE_ADMIN }
+        - { path: "^/rating/", roles: ROLE_ADMIN }
+
+
 
 when@test:
     security:

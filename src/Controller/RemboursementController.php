@@ -34,7 +34,7 @@ class RemboursementController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success' , 'Ton remboursement a été sauvegardé avec succés');
-            return $this->redirectToRoute('app_remboursement_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_remboursement_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('remboursement/new.html.twig', [

@@ -74,7 +74,7 @@ public function __construct(FlashyNotifier $flashy)
     }
 
     #[Route('/new', name: 'app_offres_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager,MailerInterface $mailer, FlashBagInterface $flashBag): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,MailerInterface $mailer_lassoued, FlashBagInterface $flashBag): Response
     {
         $offre = new Offres();
         $form = $this->createForm(OffresType::class, $offre);
@@ -95,7 +95,7 @@ public function __construct(FlashyNotifier $flashy)
         ]), 'text/html');
 
     // Envoyer l'e-mail
-    $mailer->send($email);
+    $mailer_lassoued->send($email);
             return $this->redirectToRoute('app_offres_index', [], Response::HTTP_SEE_OTHER);
         }
 

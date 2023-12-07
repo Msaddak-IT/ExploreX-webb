@@ -1,0 +1,22 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Edit Agence{% endblock %}
+
+{% block body1 %}
+    <h1 style="color: #3498db;">Edit Agence</h1>
+
+    {{ include('agence/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_agence_index') }}" class="btn btn-info mt-3" style="background-color: #3498db; color: #fff;">Back to List</a>
+
+    {{ include('agence/_delete_form.html.twig') }}
+
+    <script>
+        function confirmDelete() {
+            if (confirm('Are you sure you want to delete this item?')) {
+                document.getElementById('delete-form').submit();
+            }
+        }
+    </script>
+{% endblock %}
+

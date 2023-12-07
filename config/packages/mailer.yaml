@@ -1,6 +1,0 @@
-framework:
-    mailer:
-        dsn: 'smtp://lassoued.nour%40esprit.tn:223JFT1127@smtp.gmail.com:587?encryption=tls&auth_mode=login'
-        envelope:
-            recipients: ['lassoued.nour@esprit.tn']
-            sender: 'lassoued.nour@esprit.tn'

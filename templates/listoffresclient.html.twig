@@ -150,7 +150,7 @@
             </button>
         </td>
                         <td>
-                            <button class="btn" style="display: block; margin: auto;background-color: #047ffc; color: white;padding: 10px 25px;text-transform: uppercase;font-size: 14px;">Réserver</button>
+                            <a id="resLink" class="link-space" href="{{ path('app_reservationsajout_new')}}">Réserver</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -254,4 +254,20 @@ function updateSliderValue() {
     $('#rangeValue').text(`TDN ${$('#priceRange').val()}`);
 }
     </script>
+     <style>
+   
+#resLink {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #28a745; /* Vert */
+    color: #fff; /* Texte blanc */
+    text-decoration: none; /* Supprime la soulignement par défaut des liens */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+#resLink:hover {
+    background-color: #218838; /* Vert plus foncé au survol */
+}
+
+    </style>
 {% endblock %}

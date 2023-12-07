@@ -1,0 +1,46 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Assurance{% endblock %}
+
+{% block body1 %}
+    <h1 style="color: #3498db;">Assurance</h1>
+
+    <table class="table" style="border: 2px solid #3498db;">
+        <tbody>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">Id</th>
+                <td>{{ assurance.id }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">IdUser</th>
+                <td>{{ assurance.idUser }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">IdCategorie</th>
+                <td>{{ assurance.idCategorie }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">IdAgence</th>
+                <td>{{ assurance.idAgence }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">Passeport</th>
+                <td>{{ assurance.passeport }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">Destination</th>
+                <td>{{ assurance.destination }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">Date</th>
+                <td>{{ assurance.date ? assurance.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_assurance_index') }}" class="btn btn-info mt-3" style="background-color: #3498db; color: #fff;">Back to List</a>
+
+    <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-warning mt-3" style="background-color: #f39c12; color: #fff;">Edit</a>
+
+    {{ include('assurance/_delete_form.html.twig') }}
+{% endblock %}

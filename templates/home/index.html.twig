@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'basenew.html.twig' %}
 
 
 {% block body %}
     <br>
     <br>
-
+  <center>
     <div class="mb-3">
         You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
     </div>
@@ -15,5 +15,96 @@
     <h1>  Welcome {{ app.user.userIdentifier }} </h1><br>
     <br>
     <br>
+    </center>
+    </section>
+<!-- //how to book -->
+
+<!-- tour packages -->
+<section class="packages py-5">
+	<div class="container py-lg-4 py-sm-3">
+		<h3 class="heading text-capitalize text-center"> Discover our tour packages</h3>
+		<br>
+		<br>
+		<br>
+		<div class="row">
+			<div class="col-lg-3 col-sm-6">
+				<div class="image-tour position-relative">
+					<img src="images/ham.png" alt="" class="img-fluid" />
+					<p><span class="fa fa-tags"></span> <span>300dt</span></p>
+				</div>
+				<div class="package-info">
+					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Tunisia, Hammamet.</h6>
+					<h5 class="my-2">Hammamet, the Tunisian city of beaches and history.</h5>
+					
+					<ul class="listing mt-3">
+						<li><span class="fa fa-clock-o mr-2"></span>Duration : <span>10 Days</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="image-tour position-relative">
+					<img src="images/125.png" alt="" class="img-fluid" />
+					<p><span class="fa fa-tags"></span> <span>1500dt</span></p>
+				</div>
+				<div class="package-info">
+					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Italy</h6>
+					<h5 class="my-2">Italy, the boot-shaped wonderland</h5>
+					
+					<ul class="listing mt-3">
+						<li><span class="fa fa-clock-o mr-2"></span>Duration : <span>10 Days</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6 mt-lg-0 mt-5">
+				<div class="image-tour position-relative">
+					<img src="images/Dubai.png" alt="" class="img-fluid" />
+					<p><span class="fa fa-tags"></span> <span>2000dt</span></p>
+				</div>
+				<div class="package-info">
+					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Dubai</h6>
+					<h5 class="my-2">Dubai rising from the desert.</h5>
+					
+					<ul class="listing mt-3">
+						<li><span class="fa fa-clock-o mr-2"></span>Duration : <span>10 Days</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6 mt-lg-0 mt-5">
+				<div class="image-tour position-relative">
+					<img src="images/sidi.png" alt="" class="img-fluid" />
+					<p><span class="fa fa-tags"></span> <span>200dt</span></p>
+				</div>
+				<div class="package-info">
+					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Tunisia, Sidi Bou Said</h6>
+					<h5 class="my-2">Sidi Bou Said, Tunisia: A Blue and White Delight</h5>
+					
+					<ul class="listing mt-3">
+						<li><span class="fa fa-clock-o mr-2"></span>Duration : <span>10 Days</span></li>
+					</ul>
+				</div>
+              
+			</div>
+            
+		</div>
+          <div class="view-package text-center mt-4">
+			<a href="{{ path('app') }}" >View All Offers</a>
+            
+		</div>
+		
+	</div>
+</section>
+<section class="text-content">
+	<div class="overlay-inner py-5">
+		<div class="container py-md-3">
+			<div class="test-info">
+				<h4 class="tittle">Enjoy The Trip</h4>
+				<p class="mt-3">Looking to rent a car for your upcoming trip? Look no further! With our car rental service, we make it easy and convenient for you to find the perfect vehicle that suits your travel needs. Whether you're embarking on a road trip, exploring a new city, or simply need transportation during your vacation, our extensive fleet of cars offers a variety of options to choose from.</p>
+				<div class="text-left mt-4">
+						<a href="{{ path('app_client') }}" >Rent a car </a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 {% endblock %}

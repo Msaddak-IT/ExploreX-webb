@@ -30,4 +30,11 @@ class AcceuilController extends AbstractController
             'vehicules' => $vehiculeRepository->findAll(),
         ]);
     }
+    #[Route('/aboutus', name: 'about')]
+    public function aboutus(): Response
+    {
+        return $this->render('aboutus.html.twig', [
+            'controller_name' => 'AcceuilController',
+        ]);
+    }
 }

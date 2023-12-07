@@ -53,8 +53,8 @@ class ReclamationController extends AbstractController
             // $message = 'La reclamation est ajouté avec succès'; 
             // $twilioService->sendSMS($to, $message);
        
-            $this->addFlash('success', 'Ton reclamation a été sauvegardé avec succés');
-            return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Ta reclamation a été sauvegardé avec succés');
+            return $this->redirectToRoute('app_reclamation_new', [], Response::HTTP_SEE_OTHER);
         }
     
         return $this->renderForm('reclamation/new.html.twig', [
@@ -67,12 +67,12 @@ class ReclamationController extends AbstractController
     public function envoyerMessageWhatsApp($type, $nom, $date): Response
     {
         require_once __DIR__ . '/../../vendor/autoload.php';
-        $ultramsg_token = "npnk7o0le9w9hkqk"; 
-        $instance_id = "instance70008"; 
+        $ultramsg_token = "pqfax3pw2hc78g7h"; 
+        $instance_id = "instance70901"; 
     
         $client = new WhatsAppApi($ultramsg_token, $instance_id);
     
-        $to = "+21625055718"; 
+        $to = "+21696881950"; 
         $body = "Bonjour,\n\nNous vous informons que votre réclamation a été modifié dans notre système. Voici les détails :\n\nUtilisateur : $nom\nType de réclamation : $type\nDate : $date\n \n\nCordialement.";
     
         $api = $client->sendChatMessage($to, $body);

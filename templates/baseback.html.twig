@@ -33,7 +33,7 @@
                     <span class="btn btn-default">Go</span>
                 </form>
             </li>
-           <li class="active"><a href="{{ path('app_home') }}"><i class="fa fa-home"></i>Dashboard</a></li>
+           <li class="active"><a href="{{ path('app_acceuil') }}"><i class="fa fa-home"></i>Dashboard</a></li>
             
                 
                     
@@ -60,13 +60,13 @@
                 </ul></li>
                  <li class="sub open">
                 <a href="javascript:;">
-                    <i class="fa fa-database"></i> Transport management <div class="pull-right"><span class="caret"></span></div>
+                    <i class="fa fa-database"></i> Gestion Transport <div class="pull-right"><span class="caret"></span></div>
                 </a>
        
                 <ul class="templatemo-submenu">
                     
-                         <li><a href="{{ path('app_vehicule_index') }}">List of vehicles</a></li>
-                    <li><a href="{{ path('app_location_vehicule_index') }}">List of locations</a></li> 
+                         <li><a href="{{ path('app_vehicule_index') }}">Liste des véhicules</a></li>
+                    <li><a href="{{ path('app_location_vehicule_index') }}">Liste des locations</a></li> 
                     
                 </ul></li>
 
@@ -86,19 +86,37 @@
                     <i class="fa fa-database"></i> Gestion Bonplan <div class="pull-right"><span class="caret"></span></div>
                 </a>
                 <ul class="templatemo-submenu">
-                    <li><a href="{{ path('app_bonplan_index') }}">show BonPlans</a></li>
-                    <li><a href="{{ path('app_type_bon_plan_index') }}">Show Type BonPlan</a></li>
-                    <li><a href="{{ path('app_rating_index') }}">Show All ratings </a></li>
+                    <li><a href="{{ path('app_bonplan_index') }}">Listes des BonPlans</a></li>
+                    <li><a href="{{ path('app_type_bon_plan_index') }}"> Type BonPlan</a></li>
+                    <li><a href="{{ path('app_rating_index') }}">Afficher tous ratings </a></li>
+                </ul>
+            </li>
+
+            <li class="sub open">
+                <a href="javascript:;">
+                    <i class="fa fa-database"></i> Gestion Assurance <div class="pull-right"><span class="caret"></span></div>
+                </a>
+                <ul class="templatemo-submenu">
+                    <li><a href="{{ path('app_categorie_index') }}">Listes des catégories</a></li>
+                    <li><a href="{{ path('app_agence_index') }}"> Liste des agences</a></li>
+                    <li><a href="{{ path('app_assurance_index') }}"> Liste des assurances</a></li>
+
+                    
                 </ul>
             </li>
             
-
+             <li class="sub open">
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i> Gestion utilisateurs <div class="pull-right"><span class="caret"></span></div>
+                </a>
+                <ul class="templatemo-submenu">
+                    <li><a href="{{ path('app_user_index') }}">Liste des utilisateurs</a></li>
+                    
+                </ul>
+            </li>
                 
-            <li><a href="{{ asset('backoffice/data-visualization.html') }}"><i class="fa fa-cubes"></i><span class="badge pull-right">9</span>Data Visualization</a></li>
-            <li><a href="{{ asset('backoffice/maps.html') }}"><i class="fa fa-map-marker"></i><span class="badge pull-right">42</span>Maps</a></li>
-            <li><a href="{{ asset('backoffice/tables.html') }}"><i class="fa fa-users"></i><span class="badge pull-right">NEW</span>Manage Users</a></li>
-            <li><a href="{{ asset('backoffice/preferences.html') }}"><i class="fa fa-cog"></i>Preferences</a></li>
-            <li><a href="javascript:" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+          
+            <li><a href="{{ path('app_logout') }}"  data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
         </ul>
     </div><!--/.navbar-collapse -->
 
@@ -111,19 +129,9 @@
                 <li><a href="{{ asset('backoffice/sign-in.html') }}">Sign In Form</a></li>
             </ol>
             {% block main%}
-            <p>Dashboard is free admin template for everyone. Credits go to <a href="http://chartjs.org">Chart JS</a>, <a href="http://getbootstrap.com">Bootstrap</a>, and <a href="http://jqvmap.com">JQVMap</a>. templatemo provides <a href="#">free website templates</a> that can be used for any purpose. Morbi id nisi enim. Ut congue interdum pharetra facilisi. Aenean consectetur pellentesque mauris nec ornare. Nam tortor just, condimentum.</p>
+           
 
-            <div class="margin-bottom-30">
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="nav nav-pills">
-                            <li class="active"><a href="#">Home <span class="badge">42</span></a></li>
-                            <li class="active"><a href="#">Profile <span class="badge">126</span></a></li>
-                            <li class="active"><a href="#">Messages <span class="badge">14</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+          
 
             <div class="row">
                 <div class="col-md-6">
@@ -132,19 +140,19 @@
                             <div class="col-md-12">
                                 <div class="alert alert-success alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <strong>Success!</strong> Maecenas non lorem sed elit molestie tincidunt.
+                                    <strong>Bienvenue !  </strong>   dans l'interface d'administration.
                                 </div>
                                 <div class="alert alert-info alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    Sed in molestie lectus. Curabitur non est neque. Maecenas id luctus ligula.
+                                     Cet espace vous permet de gérer les fonctionnalités de votre système.
                                 </div>
                                 <div class="alert alert-warning alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    Vestibulum tincidunt libero urna, ut dignissim purus accumsan nec.
+                                    N'hésitez pas à explorer les différentes fonctionnalités mises à votre disposition
                                 </div>
                                 <div class="alert alert-danger alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    Mauris dignissim ante eu arcu ultricies, at sodales orci aliquet.
+                                    Nous vous remercions pour votre collaboration et votre contribution précieuse.
                                 </div>
                             </div>
                         </div>
@@ -154,13 +162,14 @@
                     <div class="templatemo-progress">
                         <div class="list-group">
                             <a href="#" class="list-group-item active">
-                                <h4 class="list-group-item-heading">Latest Data</h4>
-                                <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel adipiscing quam. Maecenas vehicula rhoncus magna, vitae lacinia sem auctor a. Vestibulum aliquam, nisl nec luctus volutpat, turpis orci posuere arcu, eget consectetur quam nunc ac arcu.</p>
+                                <h4 class="list-group-item-heading">Dernières mises à jour</h4>
+                                <p class="list-group-item-text">Nous sommes heureux de vous informer que nous avons récemment ajouté de nouvelles fonctionnalités à notre application. Nous avons maintenant mis en place un système de gestion des "bon plans" qui permettra aux utilisateurs de bénéficier d'offres spéciales et d'avantages exclusifs. De plus, nous avons également introduit une gestion d'assurance pour offrir une protection supplémentaire aux utilisateurs.
+</p>
                             </a>
                             <a href="#" class="list-group-item">
-                                <h4 class="list-group-item-heading">Older Data</h4>
-                                <p class="list-group-item-text">Maecenas in facilisis nisi. Proin gravida nunc vel justo vestibulum, quis adipiscing velit faucibus. Sed a hendrerit orci. Nunc ut bibendum eros, at varius urna. Integer cursus condimentum dui vitae sagittis. Curabitur at vehicula nunc. Praesent at sem non nisl pellentesque placerat.</p>
-                            </a>
+                                <h4 class="list-group-item-heading">Fonctionnalités existantes</h4>
+                                <p class="list-group-item-text">Nous souhaitons vous informer que notre application dispose désormais d'un système complet de gestion des fonctionnalités clés. Nous avons implémenté avec succès la gestion des utilisateurs, des offres, des réservations, des réclamations et du transport.
+  </a>
                         </div>
                         <div class="progress">
                             <div class="progress-bar progress-bar-success" style="width: 35%">
@@ -185,171 +194,15 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 margin-bottom-30">
                         <div class="panel panel-success">
-                            <div class="panel-heading">Data Visualization</div>
+                            <div class="panel-heading">Statistiques d'intéraction</div>
                             <canvas id="templatemo-line-chart" height="120" width="500"></canvas>
                         </div>
-                        <span class="btn btn-success"><a href="{{ asset ('backoffice/data-visualization.html') }}">More Charts</a></span>
-                    </div>
-                    <div class="col-md-6 col-sm-6 margin-bottom-30">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">User Table</div>
-                            <div class="panel-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>John</td>
-                                        <td>Smith</td>
-                                        <td>@js</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Bill</td>
-                                        <td>Jones</td>
-                                        <td>@bj</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Marry</td>
-                                        <td>James</td>
-                                        <td>@mj</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <span class="btn btn-primary"><a href="{{ asset('backoffice') }}">See Tables</a></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist" id="templatemo-tabs">
-                            <li class="active"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
-                            <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
-                            <li><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
-                            <li><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div class="tab-pane fade in active" id="home">
-                                <ul class="list-group">
-                                    <li class="list-group-item"><input type="checkbox" name="" value=""> Suspendisse dapibus sodales</li>
-                                    <li class="list-group-item"><input type="checkbox" name="" value=""> Proin mattis ex vitae</li>
-                                    <li class="list-group-item"><input type="checkbox" name="" value=""> Aenean euismod dui vel</li>
-                                    <li class="list-group-item"><input type="checkbox" name="" value=""> Vivamus dictum posuere odio</li>
-                                    <li class="list-group-item"><input type="checkbox" name="" value=""> Morbi convallis sed nisi suscipit</li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane fade" id="profile">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <span class="badge">33</span>
-                                        Vivamus dictum posuere odio
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="badge">9</span>
-                                        Dapibus ac facilisis in
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="badge">0</span>
-                                        Morbi convallis sed nisi suscipit
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="badge">14</span>
-                                        Cras justo odio
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="badge">2</span>
-                                        Vestibulum at eros
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane fade" id="messages">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item active">
-                                        Morbi convallis sed nisi suscipit
-                                    </a>
-                                    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                                    <a href="#" class="list-group-item">Morbi leo risus</a>
-                                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                                    <a href="#" class="list-group-item">Vestibulum at eros</a>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="settings">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item disabled">
-                                        Vivamus dictum posuere odio
-                                    </a>
-                                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                                    <a href="#" class="list-group-item">Vestibulum at eros</a>
-                                    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                                    <a href="#" class="list-group-item">Morbi leo risus</a>
-                                </div>
-                            </div>
-                        </div> <!-- tab-content -->
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="panel-group" id="accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                            Accordion Item 1
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse in">
-                                    <div class="panel-body">
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                            Accordion Item 2
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                            Accordion Item 3
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary">
-                                            Click here
-                                        </button> to load.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div></div>
+                 
+                        
+                   
+             
+          
        {%endblock%}
     <!-- Modal -->
   

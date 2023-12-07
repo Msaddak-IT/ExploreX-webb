@@ -191,7 +191,7 @@ class FactureController extends AbstractController
     
     
     #[Route('/facture/{idFacture}/send-email', name: 'send_email', methods: ['POST','GET'])]
-    public function SendEmail(Facture $facture, MailerInterface $mailer, Request $request): Response
+    public function SendEmail(Facture $facture, MailerInterface $mailer_nawras, Request $request): Response
     {
         // Generate PDF content
         $pdfContent = $this->generatePdf($facture);
@@ -211,7 +211,8 @@ class FactureController extends AbstractController
         ->text('Veuillez trouver ci-joint votre facture.')
         ->attachFromPath($tmpFilePath, 'facture.pdf');
     
-        $mailer->send($email);
+        
+        $mailer_nawras->send($email);
     
         // Remove the temporary file
         unlink($tmpFilePath);

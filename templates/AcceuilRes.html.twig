@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Grand Tour Travel Category Flat Bootstrap Responsive Web Template | Home :: w3layouts</title>
+<title>ExploreX</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <meta name="keywords" content="Grand Tour Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -57,13 +57,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 			<input type="checkbox" id="drop" />
 			<ul class="menu ml-auto mt-1">
-				<li class="active"><a href="index.html">Home</a></li>
-				<li class="active"><a href="about.html">About Us</a></li>
-				<li class="active"><a href="services.html">Services</a></li>
 				
-				<li class="active"><a href="contact.html">Contact</a></li>
-				<li class="booking"><a href="booking.html">Register</a></li>
-				<li class="booking"><a href="booking.html">Login in</a></li>
+				<li class="active"><a  href="{{ path('about') }}">About Us</a></li>
+				
+				
+				
+				<li class="booking"><a href="{{ path('app_register') }}">Register</a></li>
+				<li class="booking"><a href="{{ path('app_login') }}">Login in</a></li>
 			</ul>
 		</nav>
 		<!-- //nav -->
@@ -86,14 +86,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="container">
 							<div class="w3layouts-banner-info">
 								<h3 class="text-wh">Never let your memories be greater than your dreams.</h3>
-								<h4 class="text-wh">tristique senectus et netus et malesuada</h4>
-								<div class="buttons mt-4">
-									<a href="about.html" class="btn mr-2">About Us</a>
-
-						            <a href="{{ absolute_url('/reservationsajout/new') }}" class="btn">Book a Tour</a>
-
-
-								</div>
+								<h4 class="text-wh">Travel is the only thing you buy that makes you richer</h4>
+								
 							</div>
 						</div>
 					</div>
@@ -108,7 +102,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<h4 class="text-wh">tristique senectus et netus et malesuada</h4>
 								<div class="buttons mt-4">
 									<a href="about.html" class="btn mr-2">About Us</a>
-									<a href="appreservation" class="btn">Book a Tour</a>
+									
 								</div>
 							</div>
 						</div>
@@ -163,15 +157,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container py-lg-5 py-sm-4">
 		<div class="row">
 			<div class="col-lg-6 about-left">
+			<div style="margin-top: 100px;">
 				<h3 class="mt-lg-3">We will take you to the Top destination in the world, <strong>Explore with us!</strong></h3>
-				<p class="mt-4">Duis nisi sapien, elementum finibus fermentum eget, aliquet leo et. Mauris hendrerit vel ex.
-				Quisque vitae luctus massa. Phasellus sed aliquam leo. Vestibulum ullamcorper a massa eu fringilla. Integer ultrices finibus sed nisi.
-				in convallis felis dapibus sit amet.</p>
-				<p class="mt-3"> Donec a arcu et sapien hendrerit accumsan. Pellentesque sit amet eros iac, elementum 
-				urna ipsum accumsan, iaculis ligula. Aenean quam eget maximus in convallis felis dapibus sit amet.</p>
+				<p class="mt-4">
+Tourism in Tunisia: A Destination for Everyone
+Tunisia is a popular tourist destination, with a diverse offering that attracts visitors from all walks of life. The country boasts sandy beaches, breathtaking natural landscapes, a rich cultural heritage, and a delicious cuisine.</p>
+				</div>
 			</div>
 			<div class="col-lg-6 about-right text-lg-right mt-lg-0 mt-5">
-				<img src="images/about.jpg" alt="" class="img-fluid abt-image" />
+				<video id="myVideo" width="640" height="480" controls autoplay>
+  				<source src="video.mp4" type="video/mp4">
+  			</video>
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var video = document.getElementById("myVideo");
+  video.addEventListener("loadedmetadata", function() {
+    video.play();
+  });
+
+  // Auto-play the video on page refresh
+  video.addEventListener("ended", function() {
+    video.currentTime = 0;
+    video.play();
+  });
+});
+</script>
 			</div>
 		</div>
 		<div class="row mt-5 text-center">
@@ -219,7 +230,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span class="fa fa-map-signs"></span>
 					</div>
 					<h4>Pick Destination</h4>
-					<p class="mt-3">Vestibulum urna ligula, molestie at ante ut, finibus. Integer ultrices finibus sed nisi in convallis sed dolor.</p>
+					<p class="mt-3">Our "Pick Destination" service helps travelers choose the perfect destination based on their preferences and desires. Whether it's a relaxing beach getaway, an exciting outdoor adventure, or an immersive cultural experience, our sophisticated algorithm considers factors like climate, activities, and budget to provide personalized recommendations.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-sm-6 mt-sm-0 mt-5">
@@ -228,7 +239,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span class="fa fa-calendar"></span>
 					</div>
 					<h4>Select Date</h4>
-					<p class="mt-3">Vestibulum urna ligula, molestie at ante ut, finibus. Integer ultrices finibus sed nisi in convallis sed dolor.</p>
+					<p class="mt-3">Searching for the ideal travel dates for your upcoming trip? Look no further! With our "Select Date*" service, we're here to assist you in choosing the perfect dates that align with your preferences and requirements. </p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-sm-6 mt-lg-0 mt-5">
@@ -237,7 +248,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span class="fa fa-gift"></span>
 					</div>
 					<h4>Enjoy the Trip</h4>
-					<p class="mt-3">Vestibulum urna ligula, molestie at ante ut, finibus. Integer ultrices finibus sed nisi in convallis sed dolor.</p>
+					<p class="mt-3">Looking to make the most of your trip and fully enjoy every moment? Look no further! With our "Enjoy the Trip*" service, we're here to enhance your travel experience and help you create unforgettable memories. Whether you're seeking relaxation, adventure, cultural immersion, or culinary delights, our service provides personalized recommendations and tips to ensure that you have a fantastic journey.</p>
 				</div>
 			</div>
 		</div>
@@ -249,17 +260,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <section class="packages py-5">
 	<div class="container py-lg-4 py-sm-3">
 		<h3 class="heading text-capitalize text-center"> Discover our tour packages</h3>
-		<p class="text mt-2 mb-5 text-center">Vestibulum tellus neque, sodales vel mauris at, rhoncus finibus augue. Vestibulum urna ligula, molestie at ante ut, finibus vulputate felis.</p>
+		<br>
+		<br>
+		<br>
 		<div class="row">
 			<div class="col-lg-3 col-sm-6">
 				<div class="image-tour position-relative">
-					<img src="images/p1.jpg" alt="" class="img-fluid" />
-					<p><span class="fa fa-tags"></span> <span>20$</span></p>
+					<img src="images/ham.png" alt="" class="img-fluid" />
+					<p><span class="fa fa-tags"></span> <span>300dt</span></p>
 				</div>
 				<div class="package-info">
-					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Paris, France.</h6>
-					<h5 class="my-2">Sodales vel mauris</h5>
-					<p class="">Vestibulum tellus neque, et velit mauris at, augue.</p>
+					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Tunisia, Hammamet.</h6>
+					<h5 class="my-2">Hammamet, the Tunisian city of beaches and history.</h5>
+					
 					<ul class="listing mt-3">
 						<li><span class="fa fa-clock-o mr-2"></span>Duration : <span>10 Days</span></li>
 					</ul>
@@ -267,13 +280,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="col-lg-3 col-sm-6">
 				<div class="image-tour position-relative">
-					<img src="images/p2.jpg" alt="" class="img-fluid" />
-					<p><span class="fa fa-tags"></span> <span>20$</span></p>
+					<img src="images/125.png" alt="" class="img-fluid" />
+					<p><span class="fa fa-tags"></span> <span>1500dt</span></p>
 				</div>
 				<div class="package-info">
-					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Los Angles, USA.</h6>
-					<h5 class="my-2">Sodales vel mauris</h5>
-					<p class="">Vestibulum tellus neque, et velit mauris at, augue.</p>
+					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Italy</h6>
+					<h5 class="my-2">Italy, the boot-shaped wonderland</h5>
+					
 					<ul class="listing mt-3">
 						<li><span class="fa fa-clock-o mr-2"></span>Duration : <span>10 Days</span></li>
 					</ul>
@@ -281,13 +294,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="col-lg-3 col-sm-6 mt-lg-0 mt-5">
 				<div class="image-tour position-relative">
-					<img src="images/p3.jpg" alt="" class="img-fluid" />
-					<p><span class="fa fa-tags"></span> <span>20$</span></p>
+					<img src="images/Dubai.png" alt="" class="img-fluid" />
+					<p><span class="fa fa-tags"></span> <span>2000dt</span></p>
 				</div>
 				<div class="package-info">
-					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Agra, India.</h6>
-					<h5 class="my-2">Sodales vel mauris</h5>
-					<p class="">Vestibulum tellus neque, et velit mauris at, augue.</p>
+					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Dubai</h6>
+					<h5 class="my-2">Dubai rising from the desert.</h5>
+					
 					<ul class="listing mt-3">
 						<li><span class="fa fa-clock-o mr-2"></span>Duration : <span>10 Days</span></li>
 					</ul>
@@ -295,22 +308,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="col-lg-3 col-sm-6 mt-lg-0 mt-5">
 				<div class="image-tour position-relative">
-					<img src="images/p4.jpg" alt="" class="img-fluid" />
-					<p><span class="fa fa-tags"></span> <span>20$</span></p>
+					<img src="images/sidi.png" alt="" class="img-fluid" />
+					<p><span class="fa fa-tags"></span> <span>200dt</span></p>
 				</div>
 				<div class="package-info">
-					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Paris, France.</h6>
-					<h5 class="my-2">Sodales vel mauris</h5>
-					<p class="">Vestibulum tellus neque, et velit mauris at, augue.</p>
+					<h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>Tunisia, Sidi Bou Said</h6>
+					<h5 class="my-2">Sidi Bou Said, Tunisia: A Blue and White Delight</h5>
+					
 					<ul class="listing mt-3">
 						<li><span class="fa fa-clock-o mr-2"></span>Duration : <span>10 Days</span></li>
 					</ul>
 				</div>
 			</div>
 		</div>
-		<div class="view-package text-center mt-4">
-			<a href="packages.html">View All Packages</a>
-		</div>
+		
 	</div>
 </section>
 <!-- tour packages -->
@@ -321,12 +332,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container py-md-3">
 			<div class="test-info">
 				<h4 class="tittle">Enjoy The Trip</h4>
-				<p class="mt-3">Duis nisi sapien, elementum finibus fermentum eget, aliquet leo et. Mauris hendrerit vel ex. Quisque vitae luctus massa.
-				Phasellus sed aliquam leo a massa eu fringilla. Integer ultrices finibus sed nisi. in convallis felis dapibus
-				sit amet.</p>
-				<div class="text-left mt-4">
-						<a href="booking.html">Book Now</a>
-				</div>
+				<p class="mt-3">Looking to rent a car for your upcoming trip? Look no further! With our car rental service, we make it easy and convenient for you to find the perfect vehicle that suits your travel needs. Whether you're embarking on a road trip, exploring a new city, or simply need transportation during your vacation, our extensive fleet of cars offers a variety of options to choose from.</p>
+				
 			</div>
 		</div>
 	</div>
@@ -337,8 +344,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <section class="destinations py-5" id="destinations">
 	<div class="container py-xl-5 py-lg-3">
 		<h3 class="heading text-capitalize text-center"> Popular Destinations</h3>
-		<p class="text mt-2 mb-5 text-center">Vestibulum tellus neque, sodales vel mauris at, rhoncus finibus augue. Vestibulum urna ligula, molestie at ante ut, finibus vulputate felis.</p>
-		<div class="row inner-sec-w3layouts-w3pvt-lauinfo">
+		<br>
+		<br>
+		<br>
+				<div class="row inner-sec-w3layouts-w3pvt-lauinfo">
 			<div class="col-md-3 col-sm-6 col-6 destinations-grids text-center">
 				<h4 class="destination mb-3">China</h4>
 				<div class="image-position position-relative">
@@ -504,7 +513,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- copyright -->
 <div class="copyright py-3 text-center">
-	<p>© 2019 Grand Tour. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="=_blank"> W3layouts </a></p>
+	<p>© 2019 Grand Tour. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="=_blank"> ExploreX </a></p>
 </div>
 <!-- //copyright -->
 

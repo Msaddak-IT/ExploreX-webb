@@ -40,13 +40,59 @@
             {% block sidebar %}
             <li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
             <li class="sub open">
+             <li class="sub open">
+                <a href="javascript:;">
+                    <i class="fa fa-database"></i> Gestion Offres et service <div class="pull-right"><span class="caret"></span></div>
+                </a>
+       
+                <ul class="templatemo-submenu">
+                    
+                     <li><a href="{{ path('app_offres_index') }}">Liste des Offres</a></li>
+    <li><a href="{{ path('app_serviceajouterser_index') }}">Liste des services</a></li>  
+    </ul></li>   
+               <li class="sub open">
+                <a href="javascript:;">
+                    <i class="fa fa-database"></i> Gestion Réservations <div class="pull-right"><span class="caret"></span></div>
+                </a>
+       
+                <ul class="templatemo-submenu">
+                    
+                     <li><a href="{{ path('app_reservationsajout_index') }}">Liste des Réservations</a></li>
+    <li><a href="{{ path('app_facture_index') }}">Liste des Factures</a></li>     
+                    
+                </ul></li>
+                 <li class="sub open">
+                <a href="javascript:;">
+                    <i class="fa fa-database"></i> Transport management <div class="pull-right"><span class="caret"></span></div>
+                </a>
+       
+                <ul class="templatemo-submenu">
+                    
+                         <li><a href="{{ path('app_vehicule_index') }}">List of vehicles</a></li>
+                    <li><a href="{{ path('app_location_vehicule_index') }}">List of locations</a></li> 
+                    
+                </ul></li>
+
+                <li class="sub open">
+                <a href="javascript:;">
+                    <i class="fa fa-database"></i> Gestion Réclamation <div class="pull-right"><span class="caret"></span></div>
+                </a>
+       
+                <ul class="templatemo-submenu">
+                    
+                         <li><a href="{{ path('app_reclamation_index') }}">Liste des réclamations</a></li>
+                    <li><a href="{{ path('app_remboursement_index') }}">Liste des remboursements</a></li> 
+                    
+                </ul>
+            
                 <a href="javascript:;">
                     <i class="fa fa-database"></i> Gestion Bonplan <div class="pull-right"><span class="caret"></span></div>
                 </a>
+                
                 <ul class="templatemo-submenu">
-                    <li><a href="{{ path('app_bonplan_index') }}">show BonPlans</a></li>
-                    <li><a href="{{ path('app_type_bon_plan_index') }}">Show Type BonPlan</a></li>
-                    <li><a href="{{ path('app_rating_index') }}">Show All ratings </a></li>
+                    <li><a href="{{ path('app_bonplan_index') }}">Liste des BonPlans</a></li>
+                    <li><a href="{{ path('app_type_bon_plan_index') }}">Type BonPlan</a></li>
+                    <li><a href="{{ path('app_rating_index') }}">Afficher tous ratings </a></li>
                 </ul>
             </li>
             {% endblock %}

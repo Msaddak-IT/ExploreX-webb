@@ -18,7 +18,7 @@ class TypeBonPlan
     #[ORM\Column(length: 255)]
     private ?string $nomTypeBonPlan = null;
 
-    #[ORM\OneToMany(mappedBy: 'typeBonPlan', targetEntity: Bonplan::class)]
+    #[ORM\OneToMany(mappedBy: 'typeBonPlan', targetEntity: Bonplan::class,cascade:["remove"])]
     private Collection $bonplans;
 
     public function __construct()

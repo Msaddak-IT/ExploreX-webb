@@ -1,0 +1,84 @@
+{% extends 'basenew.html.twig' %}
+
+{% block title %}Front :{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Agences</h1>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"><button onclick="sortTable('agencesTable', 0)">Id</button></th>
+                <th scope="col"><button onclick="sortTable('agencesTable', 1)">Nom Agence</button></th>
+                <th scope="col"><button onclick="sortTable('agencesTable', 2)">Adresse</button></th>
+                <th scope="col"><button onclick="sortTable('agencesTable', 3)">Téléphone</button></th>
+                <th scope="col"><button onclick="sortTable('agencesTable', 4)">Email</button></th>
+                <th scope="col">Actions</th> {# Nouvelle colonne pour le bouton QR Code #}
+            </tr>
+            </thead>
+            <tbody id="agencesTable">
+            {% for agence in agences %}
+                <tr>
+                    <th scope="row">{{ agence.id }}</th>
+                    <td>{{ agence.nomAgence }}</td>
+                    <td>{{ agence.adresse }}</td>
+                    <td>{{ agence.telephone }}</td>
+                    <td>{{ agence.email }}</td>
+                    <td>
+                        <a target="_blank" href="{{ path('app_agence_qr', {'id': agence.id}) }}">QR Code</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h1 class="mt-4">Catégories</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"><button onclick="sortTable('categoriesTable', 0)">Id</button></th>
+                <th scope="col"><button onclick="sortTable('categoriesTable', 1)">Nom Catégorie</button></th>
+            </tr>
+            </thead>
+            <tbody id="categoriesTable">
+            {% for categorie in categories %}
+                <tr>
+                    <th scope="row">{{ categorie.id }}</th>
+                    <td>{{ categorie.nomCategorie }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function sortTable(tableId, columnIndex) {
+            const table = document.getElementById(tableId);
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+            rows.sort((a, b) => {
+                const aValue = a.children[columnIndex].innerText.trim();
+                const bValue = b.children[columnIndex].innerText.trim();
+                return aValue.localeCompare(bValue);
+            });
+
+            rows.forEach((row) => {
+                table.querySelector('tbody').appendChild(row);
+            });
+        }
+
+        function generateQRCode(nomAgence) {
+            // Ajoutez le code ici pour générer un QR Code en fonction du nom de l'agence
+            alert('Génération du QR Code pour ' + nomAgence);
+        }
+    </script>
+{% endblock %}

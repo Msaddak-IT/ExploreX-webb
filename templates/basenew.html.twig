@@ -24,12 +24,15 @@
 			<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 			<input type="checkbox" id="drop" />
 			<ul class="menu ml-auto mt-1">
-				<li class="active"><a href="index.html">Home</a></li>
-				<li class=""><a href="about.html">About Us</a></li>
-				<li class=""><a href="services.html">Services</a></li>
-				<li class=""><a href="contact.html">Contact</a></li>
-				<li class="booking"><a href="booking.html">LOGIN</a></li>
-				<li class="booking"><a href="booking.html">REGISTER</a></li>
+				<li class=""><a href="{{ path('app_logout') }}">Home</a></li>
+				<li class=""><a href="{{ path('about') }}">About Us</a></li>
+				<li class=""><a href="{{ path('app_bonplan_index') }}">Bon plans</a></li>
+				<li class=""><a href="{{ path('app_agence_index_front') }}">Assurance</a></li>
+				<li class=""><a href="{{ path('app_reclamation_new') }}">Reclamation</a></li>
+				<li class=""><a href="{{ path('app_remboursement_new') }}">Remboursement</a></li>
+				
+				<li class="booking"><a href="{{ path('app_logout') }}">Sign out</a></li>
+				
 			</ul>
 		</nav>
 		<!-- //nav -->

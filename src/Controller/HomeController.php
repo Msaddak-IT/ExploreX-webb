@@ -21,4 +21,9 @@ class HomeController extends AbstractController
 
         return $this->render('base/index.html.twig');
     }
+    // #[Route('/logout', name: 'app_loggg')]
+    // public function logout(): Response
+    // {
+    //     return $this->render('AcceuilRes.html.twig');
+    // }
 }

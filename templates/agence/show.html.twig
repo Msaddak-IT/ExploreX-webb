@@ -1,0 +1,38 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Agence{% endblock %}
+
+{% block body1 %}
+    <h1 style="color: #3498db;">Agence</h1>
+
+    <table class="table" style="border: 2px solid #3498db;">
+        <tbody>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">Id</th>
+                <td>{{ agence.id }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">NomAgence</th>
+                <td>{{ agence.nomAgence }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">Adresse</th>
+                <td>{{ agence.adresse }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">Telephone</th>
+                <td>{{ agence.telephone }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #3498db; color: #fff;">Email</th>
+                <td>{{ agence.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_agence_index') }}" class="btn btn-info mt-3" style="background-color: #3498db; color: #fff;">Back to List</a>
+
+    <a href="{{ path('app_agence_edit', {'id': agence.id}) }}" class="btn btn-warning mt-3" style="background-color: #f39c12; color: #fff;">Edit</a>
+
+    {{ include('agence/_delete_form.html.twig') }}
+{% endblock %}
